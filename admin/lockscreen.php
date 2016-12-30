@@ -66,7 +66,7 @@ while($row = mysqli_fetch_assoc($result)){
             <form class="lockscreen-credentials" action="lockscreen.php?action=1" method="Post">
               <div class="input-group">
                 <input type="hidden" class="form-control" value="<?php echo $user_email; ?>" name="user_email">
-                <input type="password" class="form-control" placeholder="password" name="user_pass">
+                <input type="password" class="form-control" placeholder="wachtwoord" name="user_pass">
 
                 <div class="input-group-btn">
                   <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>

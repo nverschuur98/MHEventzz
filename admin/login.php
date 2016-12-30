@@ -9,9 +9,9 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
 }else{
     //Go to the normal loginscreen
     //Delete old cookies
-    setcookie("user", "", time() - 3600);
-    setcookie("user_email", "", time() - 3600);
-    setcookie("logged_in", "", time() - 3600);
+    setcookie("user", "", time() - 3600, "/");
+    setcookie("user_email", "", time() - 3600, "/");
+    setcookie("logged_in", "", time() - 3600, "/");
 ?>
     <!DOCTYPE html>
     <html>
@@ -63,13 +63,13 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
             <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
-                    <input type="checkbox" name="remember"> Remember Me
+                    <input type="checkbox" name="remember"> Houd me inglogd
                 </label>
               </div>
             </div>
             <!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
             </div>
             <!-- /.col -->
           </div>
