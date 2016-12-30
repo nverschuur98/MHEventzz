@@ -193,7 +193,7 @@ check_logged_in();
                 <img src="<?php echo $_SESSION['user_image']; ?>" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $_SESSION['user_name']; ?> - Web Developer
+                  <?php echo $_SESSION['user_name'] . " - " . $_SESSION['user_description']; ?>
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -215,7 +215,7 @@ check_logged_in();
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="profile.php" class="btn btn-default btn-flat">Profiel</a>
                 </div>
                 <div class="pull-right">
                   <a href="logoff.php" class="btn btn-default btn-flat">Log Uit</a>

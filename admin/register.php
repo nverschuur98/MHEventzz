@@ -164,8 +164,8 @@ if(isset($_GET['regKey'])){
             }else{
                 
                 //Create the new user
-                $SQL = "INSERT INTO users(user_name, user_email, user_pass, user_image)
-                VALUES('$user_name','$user_email','$user_pass', 'dist/img/avatar5.png')";
+                $SQL = "INSERT INTO users(user_name, user_email, user_pass, user_image, user_since)
+                VALUES('$user_name','$user_email','$user_pass', 'dist/img/avatar5.png', NOW())";
                 $SQL2 = "DELETE FROM regkeys WHERE regKey_regKey='$regKey'";
                                 
                 $result = $conn->query($SQL);

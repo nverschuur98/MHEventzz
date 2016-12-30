@@ -63,7 +63,7 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
             <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
-                    <input type="checkbox" name="remember"> Houd me inglogd
+                    <input type="checkbox" name="remember" checked> Houd me inglogd
                 </label>
               </div>
             </div>
@@ -108,7 +108,7 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
                         $remember = $_POST['remember'];
                     }
 
-                    $SQL = "SELECT user_id, user_name, user_email, user_image FROM users WHERE user_email ='$user_email' AND user_pass ='$user_pass'";
+                    $SQL = "SELECT user_id, user_name, user_email, user_image, user_description FROM users WHERE user_email ='$user_email' AND user_pass ='$user_pass'";
                     $result = $conn->query($SQL);
 
                     if(!$result){
@@ -131,6 +131,7 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
                                 $_SESSION['user_name']  = $row['user_name'];
                                 $_SESSION['user_email'] = $row['user_email'];
                                 $_SESSION['user_image'] = $row['user_image'];
+                                $_SESSION['user_description'] = $row['user_description'];
 
                             }
 
