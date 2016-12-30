@@ -6,8 +6,6 @@ if(!isset($_GET['show_user'])){
     $user = $_GET['show_user'];
 }
 
-
-
 $SQL = "SELECT *, DATE_FORMAT(user_birthday,'%d %b %Y') AS birthday, DATE_FORMAT(user_since,'%d %b %Y') AS since FROM users WHERE user_name='$user'";
 $result = $conn->query($SQL);
 
@@ -15,7 +13,7 @@ while($row = mysqli_fetch_assoc($result)){
     $user_name = $row['user_name'];
     $user_email = $row['user_email'];
     $user_image = $row['user_image'];
-    $user_birthday = $row['birthday'];
+    $user_birthday = $row['birthday']; 
     $user_birthday_o = $row['user_birthday'];
     $user_description = $row['user_description'];
     $user_since = $row['since'];
@@ -32,7 +30,7 @@ while($row = mysqli_fetch_assoc($result)){
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Profiles</a></li>
-        <li class="active"><?php echo $user_name; ?></li>
+        <li class="active"><?php echo $user; ?></li>
       </ol>
     </section>
 
@@ -138,7 +136,7 @@ while($row = mysqli_fetch_assoc($result)){
               </div>
               <!-- /.tab-pane -->
               <div class="active tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="profilesettings.php" methode="post">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Naam</label>
                     <div class="col-sm-10">
@@ -169,7 +167,7 @@ while($row = mysqli_fetch_assoc($result)){
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Profiel Afbeelding</label>
                     <div class="col-sm-10">
-                        <input type="file" id="exampleInputFile">
+                        <input type="file" id="profilepicture" name="profilepicture">
                         <p class="help-block">let op: kies een vierkante afbeelding, Anders wordt deze vervormd.</p>
                     </div>
                   </div>
