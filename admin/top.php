@@ -57,123 +57,60 @@ check_logged_in();
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        AdminLTE Design Team
-                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Developers
-                        <small><i class="fa fa-clock-o"></i> Today</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Sales Department
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Reviewers
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
-          </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+                <i class="fa fa-bell-o"></i>
+                <?php 
+                    $amount = count_notifications($conn, $_SESSION['user_id']);
+                    if($amount > 0){
+                ?>
+                <span class="label label-warning"><?php echo $amount;?></span>
+                <?php
+                    }
+                ?>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
+                <li class="header">Je hebt 
+                <?php 
+                    echo $amount; 
+                    if($amount == 1){
+                        echo " melding";
+                    }else{
+                        echo " meldingen";
+                    }
+                ?>
+                </li>
+                <?php  
+                    if($amount > 0){
+                ?> 
+                <li>
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
+                    <ul class="menu">
+                        <?php  
+                            $user_id = $_SESSION['user_id'];
+                            $SQL = "SELECT * FROM notifications WHERE noti_user='$user_id' ORDER BY noti_id DESC";
+    
+                            $result = $conn->query($SQL);
+                            while($row = mysqli_fetch_assoc($result)){
+                                $noti_cat = $row['noti_cat'];
+                                $noti_title = $row['noti_title'];
+                                $noti_link = $row['noti_link'];
+                                
+                                echo "<li>";
+                                echo "<a href='$noti_link'>";
+                                echo "<i class='" . noti_cat_to_class($conn, $noti_cat) . "'></i>" . $noti_title;
+                                echo "</a>";
+                                echo "</li>";
+                                
+                            }
+                        ?> 
+                    </ul>
+                </li>
+                <?php  
+                    }
+                ?> 
+                <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
@@ -244,7 +181,6 @@ check_logged_in();
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['user_name']; ?></p>
-          <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->

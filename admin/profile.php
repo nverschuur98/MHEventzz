@@ -69,12 +69,12 @@ while($row = mysqli_fetch_assoc($result)){
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li><a href="#profile" data-toggle="tab">Profiel</a></li>
+              <li class="active"><a href="#profile" data-toggle="tab">Profiel</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-              <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li><a href="#settings" data-toggle="tab">Settings</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane" id="profile">
+              <div class="active tab-pane" id="profile">
                 <!-- Post -->
                 <div class="post">
                   <!-- /.user-block -->
@@ -135,7 +135,7 @@ while($row = mysqli_fetch_assoc($result)){
                 </ul>
               </div>
               <!-- /.tab-pane -->
-              <div class="active tab-pane" id="settings">
+              <div class="tab-pane" id="settings">
                 <form class="form-horizontal" action="profilesettings.php" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Naam</label>
