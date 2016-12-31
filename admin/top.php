@@ -62,7 +62,7 @@ check_logged_in();
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <?php 
-                    $amount = count_notifications($conn, $_SESSION['user_id']);
+                    $amount = noti_count($conn, $_SESSION['user_id']);
                     if($amount > 0){
                 ?>
                 <span class="label label-warning"><?php echo $amount;?></span>
@@ -131,25 +131,11 @@ check_logged_in();
                 <img src="<?php echo $_SESSION['user_image']; ?>" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $_SESSION['user_name']; ?> - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?php echo $_SESSION['user_name']; ?> - <?php echo user_info($conn, "user_description", $_SESSION['user_id']) ?>
+                  <small>lid sinds <?php echo user_info($conn, "user_since", $_SESSION['user_id']) ?></small>
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">

@@ -1,5 +1,6 @@
 <?php
 include "connection.php";
+include "functions.php";
 
 if(isset($_GET['regKey'])){
     $regKey = $_GET['regKey'];
@@ -167,9 +168,16 @@ if(isset($_GET['regKey'])){
                 $SQL = "INSERT INTO users(user_name, user_email, user_pass, user_image, user_since)
                 VALUES('$user_name','$user_email','$user_pass', 'dist/img/avatar5.png', NOW())";
                 $SQL2 = "DELETE FROM regkeys WHERE regKey_regKey='$regKey'";
-                                
+
                 $result = $conn->query($SQL);
                 $result2 = $conn->query($SQL2);
+                
+                $title = "<a href='profile.php?show_user=" . $user_name . "'>" . $user_name . "</a> is lid geworden";
+                
+                $user_id = user_id_by_email($conn, $user_email);
+                
+                timeline_item_create($conn, $title, 3, $user_id);
+                
                 if(!$result || !$result2){
                     //something went wrong, display the error
                     echo '<div class="alert alert-danger"><strong>Mislukt :(</strong><br>Sorry er is iets mis gegaan, probeer het opnieuw.<br>';

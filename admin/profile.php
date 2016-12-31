@@ -10,6 +10,7 @@ $SQL = "SELECT *, DATE_FORMAT(user_birthday,'%d %b %Y') AS birthday, DATE_FORMAT
 $result = $conn->query($SQL);
 
 while($row = mysqli_fetch_assoc($result)){
+    $user_id = $row['user_id'];
     $user_name = $row['user_name'];
     $user_email = $row['user_email'];
     $user_image = $row['user_image'];
@@ -105,33 +106,35 @@ while($row = mysqli_fetch_assoc($result)){
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- END timeline item -->
-                    <li class="time-label">
-                        <span class="bg-blue">
-                          13 Jan 2017
-                        </span>
-                    </li>
+                    <?php
+                        $SQL = "SELECT *, DATE_FORMAT(item_date,'%d %b %Y') AS date FROM timeline_items WHERE item_user='$user_id' ORDER BY item_date DESC";
+                        $result = $conn->query($SQL);
+                    
+                        while($row = mysqli_fetch_assoc($result)){
+                            
+                            $class = timeline_item_cat_to_class($conn, $row['item_cat']);
+                            
+                            if(empty($oldDate) || $row['date'] != $oldDate){
+                                
+                                echo "<li class='time-label'>";
+                                echo "<span class='bg-blue'>" . $row['date'] . "</span>";
+                                echo "</li>";
+                                
+                                $oldDate = $row['date'];
+                            }
+                            
+                            echo "<li>";
+                            echo "<i class='" . $class . "'></i>";
+                            echo "<div class='timeline-item'>";
+                            echo "<h3 class='timeline-header no-border'>";
+                            echo $row['item_title'];
+                            echo "</h3>";
+                            echo "</li>";
+                        }
+                    ?>
                     <li>
-                        <i class="ion ion-beer bg-green"></i>
-
-                        <div class="timeline-item">
-                            <h3 class="timeline-header no-border"><a href="profile.php?show_user=<?php echo $user_name; ?>"><?php echo $user_name; ?></a> heeft een feestje gevierd bij <a href="#">GHL Nieuwjaars Gala</a>.</h3>
-                        </div>
+                        <i class="fa fa-clock-o bg-gray"></i>
                     </li>
-                    <li class="time-label">
-                        <span class="bg-blue">
-                          <?php echo $user_since;?>
-                        </span>
-                    </li>
-                    <li>
-                        <i class="fa fa-child bg-gray"></i>
-
-                        <div class="timeline-item">
-                            <h3 class="timeline-header no-border"><a href="profile.php?show_user=<?php echo $user_name; ?>"><?php echo $user_name;?></a> is lid geworden</h3>
-                        </div>
-                    </li>
-                  <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
-                  </li>
                 </ul>
               </div>
               <!-- /.tab-pane -->

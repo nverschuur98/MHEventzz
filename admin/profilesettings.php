@@ -132,6 +132,14 @@ $user_description = htmlentities($_POST['user_description']);
                                 
                                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                                     echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>Je profiel foto is succesvol geupload, en wat een plaatje!</p></div>';
+                                    
+                                    $title = "rofiel foto gewijzigd";
+                                    $noti_title = "P" . $title;
+                                    $Titem_title = "<a href='profile.php?show_user=" . $_SESSION['user_name'] . "'>" . $_SESSION['user_name'] . "</a> heeft zijn p" . $title;
+                                    
+                                    noti_create($conn, 2, "Profiel foto gewijzigd", "profile.php", $_SESSION['user_id']);
+                                    timeline_item_create($conn, $Titem_title, 2, $_SESSION['user_id']);
+                                    header('Refresh: 100; url=index.php');
                                 } else {
                                     echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan met het uploaden van je foto</p></div>';
                                 }
