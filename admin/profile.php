@@ -29,8 +29,8 @@ while($row = mysqli_fetch_assoc($result)){
         Gebruikers Profiel
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Profiles</a></li>
+        <li><a href="index.php"><i class="fa fa-users"></i> Home</a></li>
+        <li><a href="profiles.php">Profiles</a></li>
         <li class="active"><?php echo $user; ?></li>
       </ol>
     </section>
@@ -72,7 +72,13 @@ while($row = mysqli_fetch_assoc($result)){
             <ul class="nav nav-tabs">
               <li class="active"><a href="#profile" data-toggle="tab">Profiel</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                <?php 
+                    if($user_name == $_SESSION['user_name']){
+                ?>
+                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                <?php 
+                    }
+                ?>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="profile">
@@ -138,6 +144,9 @@ while($row = mysqli_fetch_assoc($result)){
                 </ul>
               </div>
               <!-- /.tab-pane -->
+                <?php 
+                    if($user_name == $_SESSION['user_name']){
+                ?>
               <div class="tab-pane" id="settings">
                 <form class="form-horizontal" action="profilesettings.php" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
@@ -182,6 +191,9 @@ while($row = mysqli_fetch_assoc($result)){
                 </form>
               </div>
               <!-- /.tab-pane -->
+                <?php 
+                    }
+                ?>
             </div>
             <!-- /.tab-content -->
           </div>

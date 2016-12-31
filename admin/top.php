@@ -139,17 +139,13 @@ check_logged_in();
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="profile.php" class="btn btn-default btn-flat">Profiel</a>
                 </div>
                 <div class="pull-right">
                   <a href="logoff.php" class="btn btn-default btn-flat">Log Uit</a>
                 </div>
               </li>
             </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
@@ -174,6 +170,11 @@ check_logged_in();
         <li>
           <a href="index.php">
             <i class="fa fa-dashboard"></i> <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="profiles.php">
+            <i class="fa fa-users"></i> <span>Profielen</span>
           </a>
         </li>
       </ul>

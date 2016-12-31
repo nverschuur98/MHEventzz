@@ -80,12 +80,12 @@ include "top.php";
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
-        <div class="col-md-8">
+        <div class="col-md-6">
           
         </div>
         <!-- /.col -->
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Soorten Verhuur</h3>

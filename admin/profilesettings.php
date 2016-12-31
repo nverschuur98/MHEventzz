@@ -139,7 +139,7 @@ $user_description = htmlentities($_POST['user_description']);
                                     
                                     noti_create($conn, 2, "Profiel foto gewijzigd", "profile.php", $_SESSION['user_id']);
                                     timeline_item_create($conn, $Titem_title, 2, $_SESSION['user_id']);
-                                    header('Refresh: 100; url=index.php');
+                                    header('Refresh: 3; url=index.php');
                                 } else {
                                     echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan met het uploaden van je foto</p></div>';
                                 }
