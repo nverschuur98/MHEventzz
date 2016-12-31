@@ -1,5 +1,6 @@
 <?php
 //top.php
+ob_start();
 include "connection.php";
 include "functions.php";
 session_start();
@@ -193,7 +194,7 @@ check_logged_in();
                 <img src="<?php echo $_SESSION['user_image']; ?>" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $_SESSION['user_name'] . " - " . $_SESSION['user_description']; ?>
+                  <?php echo $_SESSION['user_name']; ?> - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -215,7 +216,7 @@ check_logged_in();
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="profile.php" class="btn btn-default btn-flat">Profiel</a>
+                  <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="logoff.php" class="btn btn-default btn-flat">Log Uit</a>
@@ -250,7 +251,7 @@ check_logged_in();
       <ul class="sidebar-menu">
         <li>
           <a href="index.php">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard"></i> <span>Home</span>
           </a>
         </li>
       </ul>

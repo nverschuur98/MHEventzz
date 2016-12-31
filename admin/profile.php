@@ -136,18 +136,18 @@ while($row = mysqli_fetch_assoc($result)){
               </div>
               <!-- /.tab-pane -->
               <div class="active tab-pane" id="settings">
-                <form class="form-horizontal" action="profilesettings.php" methode="post">
+                <form class="form-horizontal" action="profilesettings.php" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Naam</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Voor en Achternaam" value="<?php echo $user_name; ?>">
+                      <input type="text" class="form-control" id="inputName" placeholder="Voor en Achternaam" value="<?php echo $user_name; ?>" name="user_name">
                     </div>
                   </div>
                     
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo $user_email; ?>">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo $user_email; ?>" name="user_email">
                     </div>
                   </div>
                     
@@ -155,19 +155,19 @@ while($row = mysqli_fetch_assoc($result)){
                     <label for="inputName" class="col-sm-2 control-label">Verjaardag</label>
 
                     <div class="col-sm-10">
-                      <input type="date" class="form-control" id="inputName" placeholder="Name" value="<?php echo $user_birthday_o; ?>">
+                      <input type="date" class="form-control" id="inputName" placeholder="Name" value="<?php echo $user_birthday_o; ?>" name="user_birthday">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputExperience" class="col-sm-2 control-label">Functies</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Functies"><?php echo $user_description; ?></textarea>
+                      <textarea class="form-control" id="inputExperience" placeholder="Functies" name="user_description"><?php echo $user_description; ?></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Profiel Afbeelding</label>
                     <div class="col-sm-10">
-                        <input type="file" id="profilepicture" name="profilepicture">
+                        <input type="file" id="fileToUpload" name="fileToUpload" accept=".jpg,.jpeg,.png,.gif">
                         <p class="help-block">let op: kies een vierkante afbeelding, Anders wordt deze vervormd.</p>
                     </div>
                   </div>
