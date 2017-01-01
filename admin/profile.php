@@ -176,7 +176,7 @@ while($row = mysqli_fetch_assoc($result)){
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Omslag Foto</label>
+                    <label for="inputSkills" class="col-sm-2 control-label">Profiel Foto</label>
                     <div class="col-sm-10">
                         <input type="file" id="fileToUpload" name="fileToUpload" accept=".jpg,.jpeg,.png,.gif">
                         <p class="help-block">let op: kies een vierkante afbeelding, Anders wordt deze vervormd.</p>
