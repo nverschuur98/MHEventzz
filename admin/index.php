@@ -57,7 +57,14 @@ include "top.php";
 
             <div class="info-box-content">
               <span class="info-box-text">Feesten en Partijen</span>
-              <span class="info-box-number">760</span>
+                <span class="info-box-number">
+                <?php
+                    $SQL = "SELECT COUNT(*) AS amount FROM events";
+                    
+                    $result = $conn->query($SQL);
+                    echo mysqli_fetch_assoc($result)['amount'];
+                ?>
+                </span>
             </div>
             <!-- /.info-box-content -->
           </div>

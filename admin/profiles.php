@@ -2,7 +2,7 @@
 include "top.php";
 ?>
 <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -27,6 +27,7 @@ include "top.php";
                 
                 if($col_number == 1){
                     echo "<div class='row'>";
+                    $row_ended = false;
                 }
                 
                 echo "<a href='profile.php?show_user=" . $row['user_name'] . "'><div class='col-md-3 col-sm-6'>";
@@ -63,8 +64,15 @@ include "top.php";
                 if($col_number == 4){
                     echo "</div>";
                     $col_number = 0;
+                    $row_ended = true;
                 }
                 $col_number++;
+            }
+        
+            if(!$row_ended){
+                echo "</div>";
+                $col_number = 0;
+                $row_ended = true;
             }
           ?>
     </section>

@@ -27,6 +27,7 @@ include "top.php";
                 
                 if($col_number == 1){
                     echo "<div class='row'>";
+                    $row_ended = false;
                 }
                 
                 //$color = new ColorGenerator();
@@ -65,9 +66,17 @@ include "top.php";
                 if($col_number == 4){
                     echo "</div>";
                     $col_number = 0;
+                    $row_ended = true;
                 }
                 $col_number++;
             }
+            
+            if(!$row_ended){
+                echo "</div>";
+                $col_number = 0;
+                $row_ended = true;
+            }
+            
           ?>
     </section>
     <!-- /.content -->
