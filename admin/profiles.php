@@ -11,7 +11,7 @@ include "top.php";
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-users"></i> Home</a></li>
-        <li class="active">Profiles</li>
+        <li class="active">Profielen</li>
       </ol>
     </section>
 
@@ -29,11 +29,14 @@ include "top.php";
                     echo "<div class='row'>";
                 }
                 
-                echo "<a href='profile.php?show_user=" . $row['user_name'] . "'><div class='col-md-3'>";
+                echo "<a href='profile.php?show_user=" . $row['user_name'] . "'><div class='col-md-3 col-sm-6'>";
                     echo "<div class='box box-widget widget-user'>";
-                        echo "<div class='widget-user-header bg-green' style='background: url(\"dist/img/photo3.png\") center center;'>";
+                        echo "<div class='widget-user-header bg-green'";
+                            if(!empty($row['user_cover_image'])){
+                                echo "style='background: url(\"" . $row['user_cover_image'] . "\") center center;'";
+                            }
+                        echo ">";
                             echo "<h3 class='widget-user-username'>" . $row['user_name'] . "</h3>";
-                            echo "<h5 class='widget-user-desc'>" . $row['user_description'] . "</h5>";
                         echo "</div>"; 
                         echo "<div class='widget-user-image'>";
                             echo "<img class='img-circle' src='" . $row['user_image'] . "' alt='User Avatar'>";

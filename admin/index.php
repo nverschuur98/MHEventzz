@@ -25,7 +25,8 @@ include "top.php";
 
             <div class="info-box-content">
               <span class="info-box-text">Facebook Likes</span>
-              <span class="info-box-number">90<small> Likes</small></span>
+                <div id="fb-root"></div>
+                <span class="info-box-number">90</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -38,7 +39,8 @@ include "top.php";
 
             <div class="info-box-content">
               <span class="info-box-text">Twitter Followers</span>
-              <span class="info-box-number">41,410</span>
+                <script src="twittercount.js" type='text/javascript'></script>
+              <span class="info-box-number twittercount"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -129,6 +131,8 @@ include "top.php";
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
 <?php
 include "bottom.php";
 ?>

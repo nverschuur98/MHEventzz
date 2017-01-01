@@ -14,6 +14,7 @@ while($row = mysqli_fetch_assoc($result)){
     $user_name = $row['user_name'];
     $user_email = $row['user_email'];
     $user_image = $row['user_image'];
+    $user_cover_image = $row['user_cover_image'];
     $user_birthday = $row['birthday']; 
     $user_birthday_o = $row['user_birthday'];
     $user_description = $row['user_description'];
@@ -30,7 +31,7 @@ while($row = mysqli_fetch_assoc($result)){
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-users"></i> Home</a></li>
-        <li><a href="profiles.php">Profiles</a></li>
+        <li><a href="profiles.php">Profielen</a></li>
         <li class="active"><?php echo $user; ?></li>
       </ol>
     </section>
@@ -85,18 +86,16 @@ while($row = mysqli_fetch_assoc($result)){
                 <!-- Post -->
                 <div class="post">
                   <!-- /.user-block -->
+                    <?php
+                        if(!empty($user_cover_image)){
+                    ?>
                   <div class="row margin-bottom">
-                    <div class="col-sm-4">
-                      <img class="img-responsive" src="dist/img/photo1.png" alt="Photo">
-                    </div>
-                    <div class="col-sm-4">
-                      <img class="img-responsive" src="dist/img/photo2.png" alt="Photo">
-                    </div>
-                    <div class="col-sm-4">
-                      <img class="img-responsive" src="dist/img/photo4.jpg" alt="Photo">
-                    </div>
+                    <div class="col-sm-12" style="background: url('<?php echo $user_cover_image ?>') center center; height:200px; margin-left:5px;width: calc(100% - 10px);"></div>
                     <!-- /.col -->
                   </div>
+                    <?php
+                        }
+                    ?>
                   <!-- /.row -->
                     <h3>
                         Lichttechnicus
@@ -177,15 +176,21 @@ while($row = mysqli_fetch_assoc($result)){
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Profiel Afbeelding</label>
+                    <label for="inputSkills" class="col-sm-2 control-label">Omslag Foto</label>
                     <div class="col-sm-10">
                         <input type="file" id="fileToUpload" name="fileToUpload" accept=".jpg,.jpeg,.png,.gif">
                         <p class="help-block">let op: kies een vierkante afbeelding, Anders wordt deze vervormd.</p>
                     </div>
                   </div>
+                    <div class="form-group">
+                        <label for="inputSkills" class="col-sm-2 control-label">Omslag Foto</label>
+                        <div class="col-sm-10">
+                            <input type="file" id="cover_image" name="cover_image" accept=".jpg,.jpeg,.png,.gif">
+                        </div>
+                    </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-flat btn-primary">Wijzig instellingen</button>
                     </div>
                   </div>
                 </form>

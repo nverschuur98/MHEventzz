@@ -137,7 +137,88 @@ $user_description = htmlentities($_POST['user_description']);
                                     $noti_title = "P" . $title;
                                     $Titem_title = "<a href='profile.php?show_user=" . $_SESSION['user_name'] . "'>" . $_SESSION['user_name'] . "</a> heeft zijn p" . $title;
                                     
-                                    noti_create($conn, 2, "Profiel foto gewijzigd", "profile.php", $_SESSION['user_id']);
+                                    noti_create($conn, 2, $noti_title, "profile.php", $_SESSION['user_id']);
+                                    timeline_item_create($conn, $Titem_title, 2, $_SESSION['user_id']);
+                                    header('Refresh: 3; url=index.php');
+                                } else {
+                                    echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan met het uploaden van je foto</p></div>';
+                                }
+                            }
+                        }
+                        
+                        //Upload the cover image
+                        if(isset($_FILES["cover_image"]["name"]) && !empty($_FILES["cover_image"]["name"])){
+
+                            $target_dir = "IMG/profile/CP/";
+                            $target_file = $target_dir . basename($_FILES["cover_image"]["name"]);
+                            $uploadOk = 1;
+                            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+                            // Check if image file is a actual image or fake image
+                            if(isset($_POST["submit"])) {
+                                $check = getimagesize($_FILES["cover_image"]["tmp_name"]);
+                                if($check !== false) {
+                                    $errorArray[] = "File is an image - " . $check["mime"] . ".";
+                                    $uploadOk = 1;
+                                } else {
+                                    $errorArray[] = "File is not an image.";
+                                    $uploadOk = 0;
+                                }
+                            }
+
+                            // Check if file already exists
+                            if (file_exists($target_file)) {
+                                $errorArray[] = "Sorry, file already exists.";
+                                $uploadOk = 0;
+                            }
+
+                             // Check file size
+                            if ($_FILES["cover_image"]["size"] > 500000) {
+                               $errorArray[] = "Sorry, your file is too large.";
+                                $uploadOk = 0;
+                            }
+
+                            // Allow certain file formats
+                            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                            && $imageFileType != "gif" ) {
+                                $errorArray[] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                                $uploadOk = 0;
+                            }
+
+                            // Check if $uploadOk is set to 0 by an error
+                            if ($uploadOk == 0) {
+                                echo "<div class='callout callout-danger'><strong>Mislukt :(</strong><br>Sorry, your file was not uploaded. The following errors occurred:<br>";
+                                echo '<ul>';
+                                foreach($errorArray as $key => $value){ /* walk through the array so all the errors get displayed */
+                                    echo '<li>' . $value . '</li>'; /* this generates a nice error list */
+                                }
+                                echo '</ul></div>';
+                            // if everything is ok, try to upload file
+                            } else {
+                                
+                                 $SQL = "UPDATE users SET user_cover_image='$target_file' WHERE user_email='$user_email'";
+
+                                $result = $conn->query($SQL);
+
+                                //Check if all went right
+                                if(!$result ){
+                                    //something went wrong, display the error
+                                    echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan, probeer het eens opnieuw</p>';
+                                    echo $conn->error(); //debugging purposes, uncomment when needed
+                                    echo '</div>';
+                                }else{
+                                    echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>Je instellingen zijn succesvol gewijzigd</p></div>';
+                                
+                                }
+                                
+                                if (move_uploaded_file($_FILES["cover_image"]["tmp_name"], $target_file)) {
+                                    echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>Je profiel foto is succesvol geupload, en wat een plaatje!</p></div>';
+                                    
+                                    $title = "mslag foto gewijzigd";
+                                    $noti_title = "O" . $title;
+                                    $Titem_title = "<a href='profile.php?show_user=" . $_SESSION['user_name'] . "'>" . $_SESSION['user_name'] . "</a> heeft zijn o" . $title;
+                                    
+                                    noti_create($conn, 2, $noti_title, "profile.php", $_SESSION['user_id']);
                                     timeline_item_create($conn, $Titem_title, 2, $_SESSION['user_id']);
                                     header('Refresh: 3; url=index.php');
                                 } else {
