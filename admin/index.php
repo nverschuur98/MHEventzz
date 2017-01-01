@@ -39,7 +39,7 @@ include "top.php";
 
             <div class="info-box-content">
               <span class="info-box-text">Twitter Followers</span>
-                <script src="twittercount.js" type='text/javascript'></script>
+                <script src="JS/twittercount.js" type='text/javascript'></script>
               <span class="info-box-number twittercount"></span>
             </div>
             <!-- /.info-box-content -->
@@ -77,7 +77,10 @@ include "top.php";
 
             <div class="info-box-content">
               <span class="info-box-text">Instagram followers</span>
-              <span class="info-box-number">2,000</span>
+                <script src="JS/odometer.js"></script>
+                <script src="JS/main.js"></script>
+                <link rel="stylesheet" href="JS/odometer-theme-default.css">
+              <span class="info-box-number" id="channelFollowers"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
