@@ -77,10 +77,11 @@ include "top.php";
 
             <div class="info-box-content">
               <span class="info-box-text">Instagram followers</span>
-                <script src="JS/odometer.js"></script>
+                <!--<script src="JS/odometer.js"></script>
                 <script src="JS/main.js"></script>
-                <link rel="stylesheet" href="JS/odometer-theme-default.css">
-              <span class="info-box-number" id="channelFollowers"></span>
+                <link rel="stylesheet" href="JS/odometer-theme-default.css">-->
+                <script src="JS/instagramcount.js" type='text/javascript'></script>
+              <span class="info-box-number instagramcount" id="channelFollowers"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
