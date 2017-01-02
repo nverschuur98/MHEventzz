@@ -25,8 +25,8 @@ include "top.php";
 
             <div class="info-box-content">
               <span class="info-box-text">Facebook Likes</span>
-                <div id="fb-root"></div>
-                <span class="info-box-number">90</span>
+                <script src="JS/facebookcount.js" type='text/javascript'></script>
+                <span class="info-box-number facebookcount"></span>
             </div>
             <!-- /.info-box-content -->
           </div>

@@ -58,7 +58,8 @@ RIFC.live = function() {
             new Odometer({
                 el: document.querySelector("#channelFollowers"),
                 value: follower_count,
-                format: '(,ddd)'
+                format: 'd',
+				duration: 1
             });
             
             accountFollowers = follower_count;
