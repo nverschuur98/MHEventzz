@@ -1,9 +1,9 @@
-$.ajax({
-    type: "GET",
-    dataType: "jsonp",
-    url: "http://api.twittercounter.com/?twitter_id=1269973964&apikey=e9335031a759f251ee9b4e2e6634e1c5&output=JSONP&callback=getcount",
-    success: function (data) {
-        var twitterfollowcount = data.followers_current;
-        $(".twittercount").html(twitterfollowcount);
-    }
-});
+  var twitter_username = 'mheventzz';
+
+  $.ajax({
+    url: "https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names="+twitter_username,
+    dataType : 'jsonp',
+    crossDomain : true
+  }).done(function(data) {
+    $(".twittercount").text(data[0]['followers_count']);
+  });
