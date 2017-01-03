@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /JS/
+Disallow: /CSS/
+Disallow: /admin/
+Sitemap: http://www.mheventzz.nl/sitemap.xml
