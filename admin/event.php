@@ -16,6 +16,7 @@ while($row = mysqli_fetch_assoc($result)){
     $event_description = $row['event_description'];
     $event_date = $row['event_date'];
     $date = $row['date'];
+    $event_cat = $row['event_cat'];
     $event_location = $row['event_location'];
     $event_color = $row['event_color'];
     $event_progress = $row['event_progress'];
@@ -92,41 +93,159 @@ while($row = mysqli_fetch_assoc($result)){
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#profile" data-toggle="tab">Profiel</a></li>
+              <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+              <li><a href="#news" data-toggle="tab">Nieuws</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane" id="profile">
+              <div class="active tab-pane" id="info">
                 <!-- Post -->
                 <div class="post">
                   <!-- /.user-block -->
-                    <?php
-                        if(!empty($user_cover_image)){
-                    ?>
-                  <div class="row margin-bottom">
-                    <div class="col-sm-12" style="background: url('<?php echo $user_cover_image ?>') center center; height:200px; margin-left:5px;width: calc(100% - 10px);"></div>
-                    <!-- /.col -->
-                  </div>
-                    <?php
-                        }
-                    ?>
                   <!-- /.row -->
                     <h3>
-                        Lichttechnicus
+                        Basis informatie
                     </h3>
                     <p>
-                        Dit zijn drie van mijn beste foto's.
+                        Hier kan de basis informatie gewijzigd worden. Ook kan hier de status worden geupdate.
                     </p>
                 </div>
                 <!-- /.post -->
-              </div>
-              <!-- /.tab-pane -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Basis informatie</h4>
+                            <form class="form-horizontal" action="eventsesttings.php?form=1" method="POST">
+                                <div class="form-group">
+                                    <label for="inputTitle" class="col-sm-2 control-label">Naam</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputTitle" placeholder="Naam van het feest"    value="<?php echo $event_title; ?>" name="event_title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputTitle" class="col-sm-2 control-label">Beschrijving</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputTitle" placeholder="Beschrijving van het feest" value="<?php echo $event_description; ?>" name="event_description">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDate" class="col-sm-2 control-label">Datum</label>
+                                    <div class="col-sm-10">
+                                        <input type="Date" class="form-control" id="inputDate" placeholder="Date" value="<?php echo $event_date; ?>" name="event_date">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputlocation" class="col-sm-2 control-label">Locatie</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputlocation" placeholder="Naam van het feest"    value="<?php echo $event_location; ?>" name="event_location">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-flat btn-primary pull-right">Wijzig</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Organisatie</h4>
+                            <form class="form-horizontal" action="eventsesttings.php?form=2" method="POST">
+                                <div class="form-group">
+                                    <label for="inputTitle" class="col-sm-2 control-label">Naam</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputOrganizer" placeholder="Naam van de organisatie" value="De Feestcommisie" name="event_organizer">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDate" class="col-sm-2 control-label">Datum</label>
+                                    <div class="col-sm-10">
+                                        <input type="tel" class="form-control" id="inputOrganizer" placeholder="Telefoon nummer organisatie" value="0653807162" name="event_organizer_tel">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-flat btn-default pull-right">Wijzig</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Extra informatie</h4>
+                            <form class="form-horizontal" action="eventsesttings.php?form=3" method="POST">
+                                <div class="form-group">
+                                    <label for="inputColor" class="col-sm-2 control-label">Kleur</label>
+                                    <div class="col-sm-10">
+                                        <input type="color" class="form-control" id="inputColor" value="<?php echo $event_color; ?>" name="event_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputType" class="col-sm-2 control-label">Type</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="inputType" name="event_cat">
+                                            <?php                                            
+                                                $SQL = "SELECT * FROM event_categories";
+                                                $result = $conn->query($SQL);
+                                                while($row = mysqli_fetch_assoc($result)){
+                                                    echo "<option value='" . $row['cat_id'] . "'";
+                                                    if($row['cat_id'] == $event_cat){
+                                                        echo " selected";
+                                                    }
+                                                    echo ">" . $row['cat_name'] . "</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPhoto" class="col-sm-2 control-label">Omslag Foto</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" id="inputPhoto" name="event_cover_image" accept=".jpg,.jpeg,.png,.gif">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-flat btn-default pull-right">Wijzig</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="news">
+                    <div class="post">
+                        <h3>
+                            Nieuws
+                        </h3>
+                        <p>
+                            Wanneer het nieuws item is geactiveerd, wordt onderstaande tekst gebruikt. De omslag foto wordt gebruikt als cover foto op de website. Om het nieuws item ook op de voorpagina te krijgen moet je dit wijzigen onder berichten.
+                        </p>
+                    </div>
+                    <div class="post">
+                        <form class="form-horizontal" action="eventsesttings.php?form=4" method="POST">
+                                <textarea class="textarea" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                  <div class="checkbox icheck">
+                                      <label>
+                                        <input type="checkbox" name="remember"> Activeer bericht
+                                      </label>
+                                  </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="submit" class="btn btn-flat btn-primary pull-right">Wijzigingen opslaan</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
               <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- END timeline item -->
                     <?php
-                        $SQL = "SELECT *, DATE_FORMAT(item_date,'%d %b %Y') AS date FROM timeline_items WHERE item_user='$user_id' ORDER BY item_date DESC";
+                        $SQL = "SELECT *, DATE_FORMAT(item_date,'%d %b %Y') AS date FROM event_timeline_items WHERE item_id='$event_id' ORDER BY item_date DESC";
                         $result = $conn->query($SQL);
                     
                         while($row = mysqli_fetch_assoc($result)){

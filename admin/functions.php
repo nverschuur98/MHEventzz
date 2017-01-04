@@ -77,6 +77,16 @@ function timeline_item_cat_to_class($conn, $cat){
     return $class['cat_timeline_class'];
 }
 
+//Return category name by cat id
+function cat_name_from_id($conn, $id){
+    $SQL = "SELECT cat_name FROM event_categories WHERE cat_id='$id'";
+    
+    $result = $conn->query($SQL);
+    $name = mysqli_fetch_assoc($result);
+    
+    return $name['cat_name'];
+}
+
 //Random Color Generator
 function random_color() {
     return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
