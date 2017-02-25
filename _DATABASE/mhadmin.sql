@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Genereertijd: 04 jan 2017 om 19:18
+-- Genereertijd: 25 feb 2017 om 08:44
 -- Serverversie: 5.6.11
 -- PHP-versie: 5.5.3
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `cat_icon_class` text NOT NULL,
   `cat_timeline_class` text NOT NULL,
   PRIMARY KEY (`cat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `categories`
@@ -44,7 +44,10 @@ INSERT INTO `categories` (`cat_id`, `cat_name`, `cat_icon_class`, `cat_timeline_
 (1, 'Feestje', 'ion ion-beer text-green', 'ion ion-beer bg-gray'),
 (2, 'Account', 'fa fa-gears text-grey', 'fa fa-gears bg-gray'),
 (3, 'Nieuwe Gebruiker', 'fa fa-child text-aqua', 'fa fa-child bg-gray'),
-(4, 'Nieuw Feestje', 'fa fa-lightbulb-o text-yellow', 'fa fa-lightbulb-o bg-gray');
+(4, 'Nieuw Feestje', 'fa fa-lightbulb-o text-yellow', 'fa fa-lightbulb-o bg-yellow'),
+(5, 'Bericht Gewijzigd', 'ion ion-android-textsms text-aqua', 'ion ion-android-textsms bg-aqua'),
+(6, 'Feest Info Gewijzigd', 'fa fa-pencil text-orange', 'fa fa-pencil bg-orange'),
+(7, 'Organisatie Gewijzigd', 'fa fa-address-book text-orange', 'fa fa-address-book bg-orange');
 
 -- --------------------------------------------------------
 
@@ -62,6 +65,11 @@ CREATE TABLE IF NOT EXISTS `events` (
   `event_color` varchar(7) NOT NULL,
   `event_progress` int(11) NOT NULL,
   `event_cover_image` text NOT NULL,
+  `event_post` int(11) NOT NULL,
+  `event_organization` varchar(255) NOT NULL,
+  `event_organization_contact` varchar(255) NOT NULL,
+  `event_organization_tel` varchar(20) NOT NULL,
+  `event_organization_mail` varchar(255) NOT NULL,
   PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the events' AUTO_INCREMENT=3 ;
 
@@ -69,9 +77,9 @@ CREATE TABLE IF NOT EXISTS `events` (
 -- Gegevens worden uitgevoerd voor tabel `events`
 --
 
-INSERT INTO `events` (`event_id`, `event_title`, `event_description`, `event_date`, `event_cat`, `event_location`, `event_color`, `event_progress`, `event_cover_image`) VALUES
-(1, 'GHL Nieuwjaars Gala', 'Het nieuwjaarsgala op het Groene Hart Lyceum voor 2017', '2017-01-13', 1, 'Tolstraat 11, Alphen Aan Den Rijn', '#25aa12', 10, 'IMG/profile/CP/feest.jpg'),
-(2, 'GHL Kerst Gala', 'Het kerst gala op het Groene Hart Lyceum voor 2016', '2016-12-21', 1, 'Tolstraat 11, Alphen Aan Den Rijn', '#359db2', 100, '');
+INSERT INTO `events` (`event_id`, `event_title`, `event_description`, `event_date`, `event_cat`, `event_location`, `event_color`, `event_progress`, `event_cover_image`, `event_post`, `event_organization`, `event_organization_contact`, `event_organization_tel`, `event_organization_mail`) VALUES
+(1, 'GHL Nieuwjaars Gala', 'Het nieuwjaarsgala op het Groene Hart Lyceum voor 2017', '2017-01-13', 1, 'Tolstraat 11, Alphen Aan Den Rijn', '#25aa12', 100, 'IMG/profile/CP/feest.jpg', 35, 'De Feestcommisie', 'Erwin Kesting', '0653807162', '-'),
+(2, 'GHL Kerst Gala', 'Het kerst gala op het Groene Hart Lyceum voor 2016', '2016-12-21', 1, 'Tolstraat 11, Alphen Aan Den Rijn', '#359db2', 100, '', 0, 'De Feestcommisie', 'Henk', '0653807162', '');
 
 -- --------------------------------------------------------
 
@@ -112,15 +120,23 @@ CREATE TABLE IF NOT EXISTS `event_timeline_items` (
   `item_date` date NOT NULL,
   `item_event` int(3) NOT NULL,
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `event_timeline_items`
 --
 
 INSERT INTO `event_timeline_items` (`item_id`, `item_title`, `item_cat`, `item_date`, `item_event`) VALUES
-(1, '<a href="profile.php?show_user=Nick Verschuur">Nick Verschuur</a> heeft het feestje aangemaakt', 4, '2017-01-01', 1),
-(2, '<a href="profile.php?show_user=Nick Verschuur">Nick Verschuur</a> heeft het feestje aangemaakt', 4, '2017-01-04', 2);
+(2, '<a href="profile.php?show_user=Nick Verschuur">Nick Verschuur</a> heeft het feestje aangemaakt', 4, '2017-01-04', 2),
+(3, '<a href="profile.php?show_user=Nick Verschuur">Nick Verschuur</a> heeft het feestje aangemaakt', 4, '2017-01-11', 1),
+(25, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft het feest bericht gewijzigd', 5, '2017-02-12', 1),
+(26, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft de organisatie gewijzigd', 6, '2017-02-12', 1),
+(27, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft de basis informatie gewijzigd', 6, '2017-02-12', 1),
+(28, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft de organisatie gewijzigd', 6, '2017-02-12', 2),
+(29, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft de organisatie gewijzigd', 6, '2017-02-12', 2),
+(30, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft de organisatie gewijzigd', 6, '2017-02-14', 2),
+(31, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft de organisatie gewijzigd', 6, '2017-02-14', 2),
+(32, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft de organisatie gewijzigd', 6, '2017-02-14', 2);
 
 -- --------------------------------------------------------
 
@@ -136,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `noti_link` varchar(255) NOT NULL,
   PRIMARY KEY (`noti_id`),
   UNIQUE KEY `noti_id` (`noti_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `notifications`
@@ -149,7 +165,8 @@ INSERT INTO `notifications` (`noti_id`, `noti_user`, `noti_cat`, `noti_title`, `
 (27, 5, 2, 'Omslag foto gewijzigd', 'profile.php'),
 (28, 5, 2, 'Omslag foto gewijzigd', 'profile.php'),
 (29, 5, 2, 'Omslag foto gewijzigd', 'profile.php'),
-(30, 6, 2, 'Omslag foto gewijzigd', 'profile.php');
+(30, 6, 2, 'Omslag foto gewijzigd', 'profile.php'),
+(31, 5, 2, 'Profiel foto gewijzigd', 'profile.php');
 
 -- --------------------------------------------------------
 
@@ -186,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `timeline_items` (
   `item_date` date NOT NULL,
   `item_user` int(3) NOT NULL,
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All items used on timelines' AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All items used on timelines' AUTO_INCREMENT=21 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `timeline_items`
@@ -205,7 +222,8 @@ INSERT INTO `timeline_items` (`item_id`, `item_title`, `item_cat`, `item_date`, 
 (16, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft zijn omslag foto gewijzigd', 2, '2017-01-01', 5),
 (17, '<a href="profile.php?show_user=Daan%20van%20Beusekom">Daan van Beusekom</a> is lid geworden', 3, '2016-12-30', 6),
 (18, '<a href=''profile.php?show_user=Daan%20van%20Beusekom''>Daan van Beusekom</a> heeft zijn profiel foto gewijzigd', 2, '2016-12-31', 6),
-(19, '<a href=''profile.php?show_user=Daan van Beusekom''>Daan van Beusekom</a> heeft zijn omslag foto gewijzigd', 2, '2017-01-01', 6);
+(19, '<a href=''profile.php?show_user=Daan van Beusekom''>Daan van Beusekom</a> heeft zijn omslag foto gewijzigd', 2, '2017-01-01', 6),
+(20, '<a href=''profile.php?show_user=Nick Verschuur''>Nick Verschuur</a> heeft zijn profiel foto gewijzigd', 2, '2017-02-10', 5);
 
 -- --------------------------------------------------------
 

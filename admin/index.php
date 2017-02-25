@@ -7,7 +7,7 @@ include "top.php";
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Version 0.2</small>
+        <small>Version 0.3.8</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -94,7 +94,43 @@ include "top.php";
       <div class="row">
         <!-- Left col -->
         <div class="col-md-6">
-          
+          <div class="row">
+        <div class="col-xs-12">
+          <!-- Profile Image -->
+        <div class="box box-primary">
+            <div class="box-header">
+                <i class="ion ion-android-textsms"></i>
+                <h3 class="box-title">Nieuw Bericht</h3>
+            </div>
+            <div class="box-body">
+                <form class="form-horizontal" action="newsitemsettings.php?post_id=new&action=1" method="POST">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input type="text" class="form-control" placeholder="Type hier de titel" name="post_title">
+                        </div>
+                    </div>
+                    <textarea class="textarea" placeholder="Type uw bericht" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="post_content">
+                    </textarea>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox" name="post_visible" checked> Activeer bericht
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="hidden" name="post_img" value="">
+                            <input type="submit" class="btn btn-flat btn-primary pull-right" value="Wijzigingen opslaan"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
         </div>
         <!-- /.col -->
 

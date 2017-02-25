@@ -112,7 +112,7 @@ while($row = mysqli_fetch_assoc($result)){
                 <ul class="timeline timeline-inverse">
                   <!-- END timeline item -->
                     <?php
-                        $SQL = "SELECT *, DATE_FORMAT(item_date,'%d %b %Y') AS date FROM timeline_items WHERE item_user='$user_id' ORDER BY item_date DESC";
+                        $SQL = "SELECT *, DATE_FORMAT(item_date,'%d %b %Y') AS date FROM timeline_items WHERE item_user='$user_id' ORDER BY item_date DESC, item_id DESC";
                         $result = $conn->query($SQL);
                     
                         while($row = mysqli_fetch_assoc($result)){

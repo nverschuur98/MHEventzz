@@ -6,7 +6,7 @@ include "top.php";
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Profielen
+        Feestjes
         <small>Overzicht</small>
       </h1>
       <ol class="breadcrumb">

@@ -15,8 +15,8 @@ $user_description = htmlentities($_POST['user_description']);
         Instellingen
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Profiles</a></li>
+        <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="profiles.php">Profiles</a></li>
         <li class="active"><?php echo $user_name; ?></li>
       </ol>
     </section>

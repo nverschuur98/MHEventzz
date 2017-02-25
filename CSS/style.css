@@ -38,6 +38,11 @@ background-attachment: fixed;
 margin-top: 30px;
 }
 
+.body-item:last-child{
+margin-top: 30px;
+margin-bottom: 30px;
+}
+
 .height-300{
 height: 300px;
 }
@@ -88,139 +93,215 @@ height: 80px;
 font-size: 0px;
 }
 
-nav ul{
-float: left;
-list-style: none;
-height: 80px;
-width: calc(100% - 240px);
-padding: 20px;
-box-sizing: border-box;
-}
-
 .active{
 background-color: rgb(1, 165, 187);
 }
 
-nav>ul>li{
-float: left;
-width: 80px;
-height: 40px;
-border-right: dashed 1px rgba(210,210,210,0.5);
+/* Nav for large screens */
+@media (min-width: 768px){
+    nav{
+    background-color: rgba(0,140,158,0.9);
+    height: 80px;
+    font-size: 0px;
+    }
+    
+    nav ul{
+    float: left;
+    list-style: none;
+    height: 80px;
+    width: calc(100% - 240px);
+    padding: 20px;
+    box-sizing: border-box;
+    }
+
+    nav>ul>li{
+    float: left;
+    width: 80px;
+    height: 40px;
+    border-right: dashed 1px rgba(210,210,210,0.5);
+    }
+
+    nav>ul>li:last-child{
+    border: none;
+    }
+
+    nav>ul>li:hover>a{
+    background-color: rgb(0,180,204);
+    color: rgb(250,250,250);
+    text-decoration: none;
+    }
+
+    nav>ul>li>a{
+    display: block;
+    line-height: 40px;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 17px;
+    color: rgb(210,210,210);
+    text-decoration: none;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0,140,158,0.7);
+    min-width: 80px;
+    top:100%;
+    z-index: 1000;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+    display: block;
+    line-height: 40px;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 17px;
+    color: rgb(210,210,210);
+    text-decoration: none;
+    }
+
+
+    .dropdown-content>a:hover{
+    background-color: rgb(0,180,204);
+    color: rgb(250,250,250);
+    text-decoration: none;
+    }
+
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+    display: block;
+    }
+
+    .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 80px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    display:none;
+    }
+
+    nav div.search-bar{
+    float: left;
+    height: 80px;
+    width: 240px;
+    font-size: 15px;
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 20px;
+    padding-left: 0px;
+    }
+
+    div.search-bar input{
+    outline: none;
+    float: left;
+    height: 40px;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+
+    }
+
+    div.search-bar input[type=text]{
+    width: 140px;
+    background-color: rgb(230,230,230);
+    }
+
+    div.search-bar input[type=submit]{
+    width: 80px;
+    background-color: rgb(0,180,204);
+    color: rgb(250,250,250);
+    }
+
+    div.search-bar input[type=submit]:hover{
+    background-color: rgb(30,190,254);
+    } 
 }
 
-nav>ul>li:last-child{
-border: none;
-}
+@media (max-width: 767px){
+    nav{
+        background-color: rgba(0,140,158,0.9);
+        height: auto;
+        font-size: 0px;
+    }
+    
+    .navicon {
+        height: 70px;
+        width: 70px;
+        padding-left: 5px;
+    }
 
-nav>ul>li:hover>a{
-background-color: rgb(0,180,204);
-color: rgb(250,250,250);
-text-decoration: none;
-}
-
-nav>ul>li>a{
-display: block;
-line-height: 40px;
-text-align: center;
-font-family: Helvetica;
-font-size: 17px;
-color: rgb(210,210,210);
-text-decoration: none;
-}
-
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-position: relative;
-display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-display: none;
-position: absolute;
-background-color: rgba(0,140,158,0.7);
-min-width: 80px;
-top:100%;
-z-index: 1000;
-position: absolute;
-top: 100%;
-left: 0;
-z-index: 1000;
-display: none;
-float: left;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-display: block;
-line-height: 40px;
-text-align: center;
-font-family: Helvetica;
-font-size: 17px;
-color: rgb(210,210,210);
-text-decoration: none;
-}
-
-
-.dropdown-content>a:hover{
-background-color: rgb(0,180,204);
-color: rgb(250,250,250);
-text-decoration: none;
-}
-
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-display: block;
-}
-
-.caret {
-display: inline-block;
-width: 0;
-height: 0;
-margin-left: 80px;
-vertical-align: middle;
-border-top: 4px solid;
-border-right: 4px solid transparent;
-border-left: 4px solid transparent;
-display:none;
-}
-
-nav div.search-bar{
-float: left;
-height: 80px;
-width: 240px;
-font-size: 15px;
-margin: 0px;
-box-sizing: border-box;
-padding: 20px;
-padding-left: 0px;
-}
-
-div.search-bar input{
-outline: none;
-float: left;
-height: 40px;
-border: none;
-padding: 5px;
-box-sizing: border-box;
-
-}
-
-div.search-bar input[type=text]{
-width: 140px;
-background-color: rgb(200,210,250);
-}
-
-div.search-bar input[type=submit]{
-width: 80px;
-background-color: rgb(0,180,204);
-color: rgb(250,250,250);
-}
-
-div.search-bar input[type=submit]:hover{
-background-color: rgb(30,190,254);
+    .navicon i{
+        width: 70px;
+        font-size: 70px;
+        line-height: 70px;
+        color: rgb(240,240,240);
+        text-align: center;
+    }
+    
+    ul{
+        width: 100%;
+        min-height: 200px;
+        background: rgba(75,75,75,0.3);
+        height: auto;
+        list-style: none;
+        padding: 15px;
+        list-style-type: none;
+        display: none;
+    }
+    
+    ul>li{
+        box-sizing: border-box;
+        line-height: 30px;
+        color: white;
+        padding: 5px 10px 5px 10px;
+    }
+    
+    ul>li div.dropdown-content{
+        height: auto;
+    }
+    
+    li.dropdown{
+        padding-bottom: 0px;
+    }
+    
+    .dropdown-a, .dropdown-a:focus{
+        box-sizing: border-box;
+        line-height: 30px;
+        color: white;
+        padding: 5px 10px 5px 20px;
+        display: block;
+        font-family: Helvetica;
+        font-size: 17px;
+        color: rgb(210,210,210);
+        text-decoration: none;
+    }
+    
+    ul>li>a, ul>li>a:focus{
+        display: block;
+        font-family: Helvetica;
+        font-size: 17px;
+        color: rgb(210,210,210);
+        text-decoration: none;
+    }
 }
 
 article{
@@ -231,12 +312,23 @@ padding: 20px;
 padding-top: 0px;
 }
 
-.box{
-display: block;
-min-height: 100px;
-background-color: rgba(0,140,158,0.8);
-overflow: hidden;
-margin-top: 20px;
+@media (min-width: 992px){
+    .box{
+    display: block;
+    min-height: 100px;
+    background-color: rgba(0,140,158,0.8);
+    overflow: hidden;
+    margin-top: 20px;
+    }
+}
+
+@media (max-width: 992px){
+    .box{
+    display: block;
+    background-color: rgba(0,140,158,0.8);
+    overflow: hidden;
+    margin-top: 20px;
+    }
 }
 
 .box-heading{
@@ -285,8 +377,10 @@ margin-top: 20px;
 padding-top: 20px;
 }
 
-.min-height-180{
-min-height: 180px;
+@media (min-width: 992px){
+    .min-height-180{
+    min-height: 180px;
+    }
 }
 
 .no-a-style, .no-a-style:hover, .no-a-style:active, .no-a-style:visited, .no-a-style:focus{
@@ -312,11 +406,49 @@ background: url(../IMG/logo.jpg) no-repeat center center;
 -moz-background-size: cover; 
 -o-background-size: cover; 
 background-size: cover; 
-height: 150px; 
+height: 150px;
+width: 100%;
 position: relative; 
 }
 
 .more{
 float:right;
 color:#cccccc;
+}
+
+footer{
+background-color: rgba(52,56,56,0.9);
+min-height: 80px;
+}
+
+footer .row{
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    footer .footer-left, footer .footer-center, footer .footer-right{
+        line-height: 80px;
+        text-align: center;
+    }
+}
+@media (max-width: 767px) {
+    footer .footer-left, footer .footer-center, footer .footer-right{
+        line-height: 40px;
+        text-align: center;
+    }
+}
+footer .footer-left span, footer .footer-center span, footer .footer-center span a, footer .footer-right span, footer .footer-right span a{
+    color: rgb(150,150,150);
+    font-size: 15px;
+    text-align: center;
+}
+
+footer .footer-left span i{
+    width: 30%;
+    transform: translate(0,10px);
+    font-size: 50px;
+    color: rgb(150,150,150);
+}
+ul {
+    
 }

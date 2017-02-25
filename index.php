@@ -59,14 +59,14 @@ $result2 = $connection->query($SQL);
 		<?php 
 			while($row1 = $result1->fetch_assoc()){
 		
-				echo "<div class='col-xs-12 col-sm-6 col-md-4'>";
+				echo "<div class='col-xs-12 col-sm-4 col-md-4'>";
 					echo "<div class='box shadow'>";
                     echo "<a class='gal-album-img' href='nieuws_page?page=" . $row1['post_id'] . "' style='background-image:url(" . $row1['post_img'] . ")'></a>";
 						echo "<div class='min-height-180'>";
 							echo "<div class='box-heading'>" . $row1['post_title'] . "</div>";
 							echo "<div class='hr'></div>";
 							echo "<div class='box-body'>";
-								echo "<p>" . $row1['post_content'] . "</p>";
+								echo "<p>" . htmlspecialchars_decode($row1['post_content']) . "</p>";
                                 echo "<a class='more' href='nieuws_page.php?id=" . $row1['post_id'] . "'>Meer</a>";	
 							echo "</div>";
 						echo "</div>";

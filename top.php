@@ -19,10 +19,14 @@ include "database_connect.php";
 		<link href="CSS/style.css" rel="stylesheet" type="text/CSS"/>
 		<!-- Lightbox Style -->
 		<link href="CSS/lightbox.min.css" rel="stylesheet" type="text/CSS"/>
+        <!-- ION icons -->
+        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/CSS"/>
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- custom JS -->
+		<script src="JS/scripts.js"></script>
 		
 		<link rel="apple-touch-icon" sizes="180x180" href="IMG/ICON/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="IMG/ICON/favicon-32x32.png" sizes="32x32">
@@ -38,13 +42,16 @@ include "database_connect.php";
 	<body>
 		<div id="body_wrapper" class="container-fluid">
 			<header class="body-item">
-				<div class="logo_wrapper">
-					<div class="logo"></div>
-					<div class="text hidden-xs">MHEventzz</div>
-				</div>
+				<a href="index.php">
+                    <div class="logo_wrapper">
+                        <div class="logo"></div>
+                        <div class="text hidden-xs">MHEventzz</div>
+                    </div>
+                </a>
 			</header>
-			<nav class="body-item hidden-xs">
-				<ul>
+			<nav class="body-item">
+                <a class="navicon visible-xs" onClick="showNav()"><i class="ion ion-navicon"></i></a>
+				<ul id="menu">
 					<?php
 						$full_name = $_SERVER['PHP_SELF'];
 						$name_array = explode('/',$full_name);
@@ -60,15 +67,15 @@ include "database_connect.php";
 					<li class="dropdown <?php echo ($page_name_menu=='nieuws.php')?'active':'';?><?php echo ($page_name_menu=='over_ons.php')?'active':'';?>">
 						<a href="#"> Over ons</a>
 						<div class="dropdown-content">
-						  <a href="nieuws.php">Nieuws</a>
-						  <a href="over_ons.php">Over ons</a>
+						  <a class="dropdown-a" href="nieuws.php">Nieuws</a>
+						  <a class="dropdown-a" href="over_ons.php">Over ons</a>
 						</div>
 					</li>
 					<li class="<?php echo ($page_name_menu=='contact.php')?'active':'';?>">
 						<a href="contact.php">Contact</a>
 					</li>
 				</ul>
-				<div class="search-bar">
+				<div class="search-bar hidden-xs">
 					<form method="GET" action="search.php">
 						<input type="text" name="query" placeholder="Search"></input>
 						<input type="Submit" value="Search"></input>

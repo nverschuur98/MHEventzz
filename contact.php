@@ -15,12 +15,10 @@ include "top.php";
 						<div class="col-xs-12 col-sm-6 col-md-4">
 							<p>Waar zijn wij??</p>
 							<p>mail ons:</p>
-							<br />
 							<p>Bel ons:</p>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-38">
 							<p>Leimuiden en omstreken</p>
-							<p><a href="mailto:MHEventzz@hotmail.com" class="no-a-style">MHEventzz@hotmail.com</a></p>
 							<p><a href="maitlo:info@mheventzz.nl" class="no-a-style">info@mheventzz.nl</a></p>
 							<p><a href="tel:+31 683705385" class="no-a-style">+31 06 83705385</a></p>
 						</div>

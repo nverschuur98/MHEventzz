@@ -20,7 +20,7 @@ $row = $result->fetch_assoc();
             <a class='gal-album-img' href='#' style='background-image:url(<?php echo $row['post_img'] ?>)'></a>
 					<div class="box-heading"><?php echo $row['post_title'] ?></div>
                     <div class='hr'></div>
-                        <div class='box-body'><?php echo $row['post_content'] ?></div>
+                        <div class='box-body'><?php echo htmlspecialchars_decode($row['post_content']) ?></div>
              </div>
         </div>
     </div>

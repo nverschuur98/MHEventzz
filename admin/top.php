@@ -70,7 +70,7 @@ check_logged_in();
       
     </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue fixed sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -93,10 +93,11 @@ check_logged_in();
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Notifications: style can be found in dropdown.less -->
+            <?php /*
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
-                <?php 
+                <?php
                     $amount = noti_count($conn, $_SESSION['user_id']);
                     if($amount > 0){
                 ?>
@@ -147,7 +148,7 @@ check_logged_in();
                 ?> 
                 <li class="footer"><a href="#">View all</a></li>
             </ul>
-          </li>
+          </li> */ ?>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a href="lock.php" class="dropdown-toggle">
@@ -206,6 +207,11 @@ check_logged_in();
           <a href="index.php">
             <i class="fa fa-dashboard"></i> <span>Home</span>
           </a>
+        </li>
+        <li>
+            <a href="newsitems.php">
+                <i class="ion ion-android-textsms"></i> <span>Berichten</span>
+            </a>
         </li>
         <li>
             <a href="events.php">
