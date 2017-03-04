@@ -46,7 +46,7 @@ include "top.php";
         // makes sure nobody uses SQL injection
          
         $raw_results = mysql_query("SELECT post_id, post_by, category_id, post_title, MID(post_content,1,850) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts
-            WHERE post_visible = 0 AND (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%')") or die(mysql_error());
+            WHERE post_visible = 1 AND (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%') AND post_visible = 1") or die(mysql_error());
              
         // * means that it selects all fields, you can also write: `id`, `title`, `text`
         // articles is the name of our table
@@ -87,7 +87,7 @@ include "top.php";
          
     }
     else{ // if query length is less than minimum
-        echo "Minimale lengte is ".$min_length;
+        echo "Minimale lengte is " . $min_length . "&nbsp;woorden!";
     }
 ?>
 
