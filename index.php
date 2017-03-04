@@ -61,7 +61,7 @@ $result2 = $connection->query($SQL);
 		
 				echo "<div class='col-xs-12 col-sm-4 col-md-4'>";
 					echo "<div class='box shadow'>";
-                    echo "<a class='gal-album-img' href='nieuws_page?page=" . $row1['post_id'] . "' style='background-image:url(" . $row1['post_img'] . ")'></a>";
+                    echo "<a class='gal-album-img' href='nieuws_page.php?id=" . $row1['post_id'] . "' style='background-image:url(" . $row1['post_img'] . ")'></a>";
 						echo "<div class='min-height-180'>";
 							echo "<div class='box-heading'>" . $row1['post_title'] . "</div>";
 							echo "<div class='hr'></div>";

@@ -6,7 +6,7 @@ include "top.php";
 ?>
 
 <?php
-    mysql_connect("localhost", "admin", "87dmzXt8V4") or die("Error connecting to database: ".mysql_error());
+    mysql_connect($db_servername, $db_username, $db_password) or die("Error connecting to database: ".mysql_error());
     /*
         localhost - it's location of the mysql server, usually localhost
         root - your username
@@ -15,7 +15,7 @@ include "top.php";
         if connection fails it will stop loading the page and display an error
     */
      
-    mysql_select_db("mheventzz_web") or die(mysql_error());
+    mysql_select_db($db_name) or die(mysql_error());
     /* tutorial_search is the name of database we've created */
 ?>
 
@@ -24,7 +24,7 @@ include "top.php";
 	<div class="row row-eq-height">
          <div class="col-xs-12">
             <div class="box shadow">
-				<div class="min-height-180">
+				<div class="min-height-18">
 					<div class="box-heading">Zoek resultaten</div>
                     <div class='hr'></div>
                         <div class='box-body'>
@@ -45,8 +45,8 @@ include "top.php";
         $query = mysql_real_escape_string($query);
         // makes sure nobody uses SQL injection
          
-        $raw_results = mysql_query("SELECT * FROM posts
-            WHERE (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%')") or die(mysql_error());
+        $raw_results = mysql_query("SELECT post_id, post_by, category_id, post_title, MID(post_content,1,850) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts
+            WHERE post_visible = 0 AND (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%')") or die(mysql_error());
              
         // * means that it selects all fields, you can also write: `id`, `title`, `text`
         // articles is the name of our table
@@ -56,13 +56,28 @@ include "top.php";
         // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
          
         if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-            echo"<p>Je zocht naar:".$query;
+            echo"<p>Je zocht naar:" .$query;
+            echo"</p>
+                </div>
+            </div>
+        </div>
+    </div>";
              
             while($results = mysql_fetch_array($raw_results)){
             // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
                 
-                echo "<p><h3>".$results['post_title']."</h3>".$results['post_content']."</p><br /><a class='more' href='nieuws_page.php?id=".$results['post_id']."'>Meer</a><img src='".$results['post_img']."' height='200px'>";
+                echo "<div class='col-xs-12'>
+                        <div class='box shadow'>
+                            <div class='min-height-18'>
+                               <div class='box-heading'>".$results['post_title']."</div>
+                                    <div class='hr'></div>
+                                        <div class='box-body'>
+                                            <div class='col-xs-12 col-sm-6 col-md-8'>";
+                
+                echo  "<p>".htmlspecialchars_decode ($results['post_content'])."<br /><a class='more' href='nieuws_page.php?id=".$results['post_id']."'>Meer</a></div>";
+                echo  "<div clas='col-xs-12 col-sm-6 col-md-4'><img style='width: 33.33333333%;height: auto;' src='".$results['post_img']."'></div>";
                 // posts results gotten from database(title and text) you can also show id ($results['id'])
+                echo"</p></div></div></div></div>";
             }
              
         }
@@ -76,5 +91,9 @@ include "top.php";
     }
 ?>
 
-                    </div>
-    </div>
+ 
+</article>
+                
+<?php
+include "bottom.php";
+?>
