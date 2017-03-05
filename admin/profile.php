@@ -98,10 +98,10 @@ while($row = mysqli_fetch_assoc($result)){
                     ?>
                   <!-- /.row -->
                     <h3>
-                        Lichttechnicus
+                        <?php echo $user_name;?>
                     </h3>
                     <p>
-                        Dit zijn drie van mijn beste foto's.
+                        <?php echo $user_description;?>
                     </p>
                 </div>
                 <!-- /.post -->

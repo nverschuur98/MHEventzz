@@ -2,10 +2,10 @@
 include "top.php";
 //Check all varaibles
 
-$user_name = htmlentities($_POST['user_name']);
-$user_email = htmlentities($_POST['user_email']);
-$user_birthday = htmlentities($_POST['user_birthday']);
-$user_description = htmlentities($_POST['user_description']);
+$user_name = $conn->real_escape_string($_POST['user_name']);
+$user_email = $conn->real_escape_string($_POST['user_email']);
+$user_birthday = $conn->real_escape_string($_POST['user_birthday']);
+$user_description = $conn->real_escape_string($_POST['user_description']);
 ?>
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

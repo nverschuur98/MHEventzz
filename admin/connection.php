@@ -23,7 +23,7 @@ $db_name = "mheventzz_web";
 $connweb = new mysqli($db_servername, $db_username, $db_password, $db_name);
 
 //Check if succeed
-if($conn->connect_error){
+if($connweb->connect_error){
 	die("Connection to database failed: " . $conn->connect_error);
 }
 

@@ -17,6 +17,24 @@ include "top.php";
 
     <!-- Main content -->
     <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <form action="eventsettings.php?action=new" method="POST">
+                                <button type="submit" class="btn btn-success btn-flat btn-sm" style="margin: 5px; margin-bottom: 9px; margin-left: 9px;">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <h4>Voeg feest toe</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
       <!-- Info boxes -->
           <?php 
             $SQL = "SELECT *, DATE_FORMAT(event_date,'%d %b %Y') AS date FROM events ORDER BY event_date DESC";
@@ -36,7 +54,7 @@ include "top.php";
                     echo "<div class='box box-widget widget-user'>";
                         echo "<div class='widget-user-header bg-black' style='background: " . $row['event_color'] . " ";
                             if(!empty($row['event_cover_image'])){
-                                echo "url(\"" . $row['event_cover_image'] . "\") center center ";
+                                echo "url(\"" . $row['event_cover_image'] . "\") center center; background-size: cover ";
                             }
                         echo "!important;'>";
                             echo "<h3 class='widget-user-username'>" . $row['event_title'] . "</h3>";

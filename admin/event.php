@@ -69,7 +69,7 @@ if($event_post != 0){
                     if(!empty($event_cover_image)){
                 ?>
                 <div class="row">
-                    <div class="col-sm-12" style="background: url('<?php echo $event_cover_image ?>') center center; height:100px; margin-left:5px; margin-bottom: 5px;width: calc(100% - 10px);"></div>
+                    <div class="col-sm-12" style="background: url('<?php echo $event_cover_image ?>') center center; background-size: cover;height:100px; margin-left:5px; margin-bottom: 5px;width: calc(100% - 10px);"></div>
                     <!-- /.col -->
                 </div>
                 <?php
@@ -113,9 +113,17 @@ if($event_post != 0){
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
-              <li><a href="#news" data-toggle="tab">Nieuws</a></li>
-              <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+                <li><a href="#news" data-toggle="tab">Nieuws</a></li>
+                <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                <li class="pull-right">
+                        <form action="eventsettings.php?event_id=<?php echo $event_id ?>&action=0" method="POST">
+                            <input type="hidden" name="post_title" <?php echo "value='" . $event_title . "'"; ?>>
+                            <button type="submit" class="btn btn-danger btn-flat" style="margin: 2px;">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                </li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="info">
@@ -136,31 +144,31 @@ if($event_post != 0){
                             <h4>Basis informatie</h4>
                             <form class="form-horizontal" action="eventsettings.php?event_id=<?php echo $event_id ?>&action=1" method="POST">
                                 <div class="form-group">
-                                    <label for="inputTitle" class="col-sm-2 control-label">Naam</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputTitle" class="col-sm-3 control-label">Naam</label>
+                                    <div class="col-sm-9">
                                         <input type="text" class="form-control" id="inputTitle" placeholder="Naam van het feest"    value="<?php echo $event_title; ?>" name="event_title">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputTitle" class="col-sm-2 control-label">Beschrijving</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputTitle" class="col-sm-3 control-label">Beschrijving</label>
+                                    <div class="col-sm-9">
                                         <input type="text" class="form-control" id="inputTitle" placeholder="Beschrijving van het feest" value="<?php echo $event_description; ?>" name="event_description">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDate" class="col-sm-2 control-label">Datum</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputDate" class="col-sm-3 control-label">Datum</label>
+                                    <div class="col-sm-9">
                                         <input type="Date" class="form-control" id="inputDate" placeholder="Date" value="<?php echo $event_date; ?>" name="event_date">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputlocation" class="col-sm-2 control-label">Locatie</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputlocation" placeholder="Naam van het feest"    value="<?php echo $event_location; ?>" name="event_location">
+                                    <label for="inputlocation" class="col-sm-3 control-label">Locatie</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="inputlocation" placeholder="Locatie van het feest"    value="<?php echo $event_location; ?>" name="event_location">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="col-sm-offset-3 col-sm-9">
                                         <button type="submit" class="btn btn-flat btn-primary pull-right">Wijzig</button>
                                     </div>
                                 </div>
@@ -170,31 +178,31 @@ if($event_post != 0){
                             <h4>Organisatie</h4>
                             <form class="form-horizontal" action="eventsettings.php?event_id=<?php echo $event_id ?>&action=2" method="POST">
                                 <div class="form-group">
-                                    <label for="inputTitle" class="col-sm-2 control-label">Naam</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputTitle" class="col-sm-3 control-label">Naam</label>
+                                    <div class="col-sm-9">
                                         <input type="text" class="form-control" id="inputOrganizer" placeholder="Naam van de organisatie" value="<?php echo $event_organization ?>" name="event_organization">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputTitle" class="col-sm-2 control-label">Contact Persoon</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputTitle" class="col-sm-3 control-label">Contact Persoon</label>
+                                    <div class="col-sm-9">
                                         <input type="text" class="form-control" id="inputOrganizer" placeholder="Naam van de contactpersoon" value="<?php echo $event_organization_contact ?>" name="event_organization_contact">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDate" class="col-sm-2 control-label">Telefoon</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputDate" class="col-sm-3 control-label">Telefoon</label>
+                                    <div class="col-sm-9">
                                         <input type="tel" class="form-control" id="inputOrganizer" placeholder="Telefoon nummer organisatie" value="<?php echo $event_organization_tel ?>" name="event_organization_tel">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDate" class="col-sm-2 control-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type="tel" class="form-control" id="inputOrganizer" placeholder="Email van de organisatie" value="<?php echo $event_organization_mail ?>" name="event_organization_mail">
+                                    <label for="inputDate" class="col-sm-3 control-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="inputOrganizer" placeholder="Email van de organisatie" value="<?php echo $event_organization_mail ?>" name="event_organization_mail">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="col-sm-offset-3 col-sm-9">
                                         <button type="submit" class="btn btn-flat btn-default pull-right">Wijzig</button>
                                     </div>
                                 </div>
@@ -204,16 +212,16 @@ if($event_post != 0){
                     <div class="row">
                         <div class="col-md-6">
                             <h4>Extra informatie</h4>
-                            <form class="form-horizontal" action="eventsettings.php?event_id=<?php echo $event_id ?>&action=3" method="POST">
+                            <form class="form-horizontal" action="eventsettings.php?event_id=<?php echo $event_id ?>&action=3" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="inputColor" class="col-sm-2 control-label">Kleur</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputColor" class="col-sm-3 control-label">Kleur</label>
+                                    <div class="col-sm-9">
                                         <input type="color" class="form-control" id="inputColor" value="<?php echo $event_color; ?>" name="event_color">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputType" class="col-sm-2 control-label">Type</label>
-                                    <div class="col-sm-10">
+                                    <label for="inputType" class="col-sm-3 control-label">Type</label>
+                                    <div class="col-sm-9">
                                         <select class="form-control" id="inputType" name="event_cat">
                                             <?php                                            
                                                 $SQL = "SELECT * FROM event_categories";
@@ -230,13 +238,14 @@ if($event_post != 0){
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPhoto" class="col-sm-2 control-label">Omslag Foto</label>
-                                    <div class="col-sm-10">
-                                        <input type="file" id="inputPhoto" name="event_cover_image" accept=".jpg,.jpeg,.png,.gif">
+                                    <label for="event_cover_image" class="col-sm-3 control-label">Omslag Foto</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" id="event_cover_image" name="event_cover_image" accept=".jpg,.jpeg,.png,.gif">
+                                        <p class="help-block">let op: de afbeelding mag niet groter zijn dan 2MB.</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="col-sm-offset-3 col-sm-9">
                                         <button type="submit" class="btn btn-flat btn-default pull-right">Wijzig</button>
                                     </div>
                                 </div>

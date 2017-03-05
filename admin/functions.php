@@ -12,6 +12,7 @@ function check_logged_in(){
 	}
 
 }
+
 //Get Quick info
 function user_info($conn, $info, $id){
     $SQL = "SELECT $info FROM users WHERE user_id='$id'";
@@ -97,54 +98,67 @@ function cat_name_from_id($conn, $id){
 }
 
 //Upload an image
-function upload_image($conn, array $fc_array){
+function upload_image($conn, $fc_array){
     /*
-    
     function array structure: 
-        [1]= image_input
-        [2]= image_use //profile image //news image //cover image
-        [3]= image_use_ident //Assign to this id or email etc
+        [0]= image_input
+        [1]= image_use //profile image //news image //cover image
+        [2]= image_use_ident //Assign to this id or email etc
         
         array(1=>"image", 2=>"43", 3=>"");
-    
     */
     
-    if(isset($_FILES["cover_image"]["name"]) && !empty($_FILES["cover_image"]["name"])){
+    if(isset($fc_array[0]["name"]) && !empty($fc_array[0]["name"])){
         $target_dir = "../IMG/";
-        $target_file = $target_dir . basename($_FILES["cover_image"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-        // Check if image file is a actual image or fake image
-        if(isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["cover_image"]["tmp_name"]);
-            if($check !== false) {
-                $errorArray[] = "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                $errorArray[] = "File is not an image.";
-                $uploadOk = 0;
-            }
+        if($fc_array[1] == "event_cover_image"){
+            $target_dir = "../IMG/event/" . $fc_array[2] . "/cp/"; 
+            $target_dir_final = $target_dir;
+        }else if($fc_array[1] == "post_img"){
+            $target_dir = "IMG/posts/" . $fc_array[2] . "/"; 
+            $target_dir_final = "../" . $target_dir;
         }
-
+        
+        if(!file_exists($target_dir_final)){
+            mkdir($target_dir_final, 0777, true);
+        }
+        
+        $target_file = $target_dir . basename($fc_array[0]["name"]);
+        $target_file_final = $target_dir_final . basename($fc_array[0]["name"]);
+                
+        $uploadOk = 1;
+        $imageFileType = strtoupper(pathinfo($target_file,PATHINFO_EXTENSION));
+        
+        // Check if image file is a actual image or fake image
+        $check = getimagesize($fc_array[0]["tmp_name"]);
+        if($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $errorArray[] = "File is not an image.";
+            $uploadOk = 0;
+            $errorArray[] = "upload \$_FILES error :" . $fc_array[0]["error"];
+        }
+        
         // Check if file already exists
-        if (file_exists($target_file)) {
+        if ($fc_array[1] == "event_cover_image" && file_exists($target_file_final)) {
+            $errorArray[] = "Sorry, file already exists.";
+            $uploadOk = 0;
+        }else if($fc_array[1] == "post_img" && file_exists($target_file_final)){
             $errorArray[] = "Sorry, file already exists.";
             $uploadOk = 0;
         }
 
         // Check file size
-        if ($_FILES["cover_image"]["size"] > 500000) {
-            $errorArray[] = "Sorry, your file is too large.";
+        if ($_FILES[$fc_array[1]]["size"] > 3 * 1048576 /*MB*/) {
+            $errorArray[] = "Sorry, your file is too large. Max 3 MB";
             $uploadOk = 0;
         }
 
         // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+        if($imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG" && $imageFileType != "GIF" ) {
             $errorArray[] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             $uploadOk = 0;
         }
-
+        
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
             echo "<div class='callout callout-danger'><strong>Mislukt :(</strong><br>Sorry, your file was not uploaded. The following errors occurred:<br>";
@@ -156,36 +170,32 @@ function upload_image($conn, array $fc_array){
             
             // if everything is ok, try to upload file
         } else {
-                            
-            $SQL = "UPDATE users SET user_cover_image='$target_file' WHERE user_email='$user_email'";
-            $result = $conn->query($SQL);
-
-            //Check if all went right
-            if(!$result ){
-                //something went wrong, display the error
-                echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan, probeer het eens opnieuw</p>';
-                    echo $conn->error(); //debugging purposes, uncomment when needed
-                echo '</div>';
-            }else{
-                echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>Je instellingen zijn succesvol gewijzigd</p></div>';
-            }
-                                
-            if (move_uploaded_file($_FILES["cover_image"]["tmp_name"], $target_file)) {
-                echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>Je profiel foto is succesvol geupload, en wat een plaatje!</p></div>';
-                                    
+            if($fc_array[1] == "event_cover_image"){
+                $SQL = "UPDATE events SET event_cover_image='$target_file_final' WHERE event_id='$fc_array[2]'";
+                $message = "Je feest foto is succesvol gewijzigd!";
                 $title = "mslag foto gewijzigd";
                 $noti_title = "O" . $title;
-                $Titem_title = "<a href='profile.php?show_user=" . $_SESSION['user_name'] . "'>" . $_SESSION['user_name'] . "</a> heeft zijn o" . $title;
-                                    
-                noti_create($conn, 2, $noti_title, "profile.php", $_SESSION['user_id']);
-                timeline_item_create($conn, $Titem_title, 2, $_SESSION['user_id']);
-                    header('Refresh: 3; url=index.php');
+                $Titem_title = "<a href='profile.php?show_user=" . $_SESSION['user_name'] . "'>" . $_SESSION['user_name'] . "</a> heeft de o" . $title;
+            }else if($fc_array[1] == "post_img"){
+                $SQL = "UPDATE posts SET post_img='$target_file' WHERE post_id='$fc_array[2]'";
+                $message = "Je bericht foto is succesvol gewijzigd!";
+            }  
+            
+            $result = $conn->query($SQL);
+                    
+            if ($result && move_uploaded_file($fc_array[0]["tmp_name"], $target_file_final)) {
+                echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>' . $message . '</p></div>';
+                
+                if($fc_array[1] == "event_cover_image"){
+                    event_timeline_item_create($conn, $Titem_title, 8, $fc_array[2]);
+                }
             } else {
-                echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan met het uploaden van je foto</p></div>';
+                echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan met het uploaden van je foto<br>' . $conn->error . '</p></div>';
             }
         }
     }
 }
+
 
 //Random Color Generator
 function random_color() {

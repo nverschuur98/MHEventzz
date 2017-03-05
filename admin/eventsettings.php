@@ -3,14 +3,17 @@ include "top.php";
 //Check all varaibles
 
 $action = $_GET['action'];
-$event_id = $_GET['event_id'];
+if(isset($_GET['event_id'])){
+    $event_id = $_GET['event_id'];
 
-$SQL = "SELECT * FROM events WHERE event_id=$event_id";
+    $SQL = "SELECT * FROM events WHERE event_id=$event_id";
 
-$result = $conn->query($SQL);
-$row = mysqli_fetch_assoc($result);
-$event_post = $row['event_post'];
-$event_title = $row['event_title'];
+    $result = $conn->query($SQL);
+    $row = mysqli_fetch_assoc($result);
+    $event_post = $row['event_post'];
+    $event_title = $row['event_title'];
+}
+
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -40,12 +43,25 @@ $event_title = $row['event_title'];
                     </div>
                     <div class="box-body">
                         <?php 
-                            if($action == 1){
+                            if($action == 0){
+                                $SQL = "DELETE FROM events WHERE event_id='$event_id'";
+                                
+                                $result = $conn->query($SQL);
+                                    
+                                if(!$result){
+                                    echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan, probeer het eens opnieuw</p>';
+                                        echo $conn->error; //debugging purposes
+                                    echo '</div>';
+                                }else{
+                                    echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>het feest is succesvol verwijderd</p></div>';
+                                    header('Refresh: 3; url=events.php');
+                                }
+                            }else if($action == 1){
                                 //Basis informatie
-                                $event_title = htmlentities($_POST['event_title']);
-                                $event_description = htmlentities($_POST['event_description']);
+                                $event_title = $conn->real_escape_string($_POST['event_title']);
+                                $event_description = $conn->real_escape_string($_POST['event_description']);
                                 $event_date = $_POST['event_date'];
-                                $event_location = htmlentities($_POST['event_location']);
+                                $event_location = $conn->real_escape_string($_POST['event_location']);
                                 
                                 if(!empty($event_title) || !empty($event_date)){
                                     $SQL = "UPDATE events SET event_title='$event_title', event_date='$event_date', event_description='$event_description', event_location='$event_location' WHERE event_id='$event_id'";
@@ -65,10 +81,10 @@ $event_title = $row['event_title'];
                                 }
                             }else if($action == 2){
                                 //Organisatie
-                                $event_organization = htmlentities($_POST['event_organization']);
-                                $event_organization_contact = htmlentities($_POST['event_organization_contact']);
-                                $event_organization_tel = htmlentities($_POST['event_organization_tel']);
-                                $event_organization_mail = htmlentities($_POST['event_organization_mail']);
+                                $event_organization = $conn->real_escape_string($_POST['event_organization']);
+                                $event_organization_contact = $conn->real_escape_string($_POST['event_organization_contact']);
+                                $event_organization_tel = $conn->real_escape_string($_POST['event_organization_tel']);
+                                $event_organization_mail = $conn->real_escape_string($_POST['event_organization_mail']);
                                 
                                 if(!empty($event_organization)){
                                     $SQL = "UPDATE events SET event_organization='$event_organization', event_organization_contact='$event_organization_contact', event_organization_tel='$event_organization_tel', event_organization_mail='$event_organization_mail' WHERE event_id='$event_id'";
@@ -87,12 +103,33 @@ $event_title = $row['event_title'];
                                     }
                                 }
                             }else if($action == 3){
+                                //Info Extra
+                                $event_color = $_POST['event_color'];
+                                $event_cat = $_POST['event_cat'];
+                                $fc_array = array($_FILES["event_cover_image"], "event_cover_image", $event_id);
+
+                                $SQL = "UPDATE events SET event_cat='$event_cat', event_color='$event_color' WHERE event_id='$event_id'";
+                                
+                                $result = $conn->query($SQL);
+                                
+                                if(!$result){
+                                    echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan, probeer het eens opnieuw</p>';
+                                    echo $conn->error; //debugging purposes, uncomment when needed
+                                    echo '</div>';
+                                }else{
+                                    echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>de extra informatie is succesvol gewijzigd</p></div>';
+                                    $Titem_title = "<a href='profile.php?show_user=" . $_SESSION['user_name'] . "'>" . $_SESSION['user_name'] . "</a> heeft de extra informatie gewijzigd";
+                                    event_timeline_item_create($conn, $Titem_title, 6, $event_id);
+                                    header('Refresh: 2; url=event.php?event='. $event_id . '');
+                                }
+                                
+                                upload_image($conn, $fc_array);
                                 
                             }else if($action == 4){
                                 //Change news item
 
-                                $post_title = htmlentities($_POST['post_title']);
-                                $post_content = htmlentities($_POST['post_content']);
+                                $post_title = $conn->real_escape_string($_POST['post_title']);
+                                $post_content = $conn->real_escape_string($_POST['post_content']);
                                 $post_visible = false;
                                 if(!empty($_POST['post_img'])){
                                     $post_img = "admin/" . $_POST['post_img'];
@@ -149,6 +186,11 @@ $event_title = $row['event_title'];
                                 }else{
                                     echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan, probeer het eens opnieuw</p></div>';
                                 }
+                            }else if($action == "new"){
+                                $SQL = "INSERT INTO events (event_title,event_color) VALUES ('Nieuw Feest', '" . random_color() . "')";
+                                
+                                $result = $conn->query($SQL);
+                                header('Refresh: 0; url=events.php');
                             }
                         ?>
                   </div>

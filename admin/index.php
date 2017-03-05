@@ -7,7 +7,7 @@ include "top.php";
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Version 0.3.8</small>
+        <small>Version 0.3.9</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -103,14 +103,24 @@ include "top.php";
                 <h3 class="box-title">Nieuw Bericht</h3>
             </div>
             <div class="box-body">
-                <form class="form-horizontal" action="newsitemsettings.php?post_id=new&action=1" method="POST">
+                <form class="form-horizontal" action="newsitemsettings.php?post_id=new&action=1" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input type="text" class="form-control" placeholder="Type hier de titel" name="post_title">
                         </div>
                     </div>
+                    <hr>
                     <textarea class="textarea" placeholder="Type uw bericht" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="post_content">
                     </textarea>
+                    <hr>
+                    <div class="form-group">
+                        <label for="post_img" class="col-sm-12">Bericht Foto</label>
+                        <div class="col-sm-12">
+                            <input type="file" id="post_img" name="post_img" accept=".jpg,.jpeg,.png,.gif">
+                            <p class="help-block">let op: de afbeelding mag niet groter zijn dan 2MB.</p>
+                        </div>
+                    </div>
+                    <hr>
                     <div class="form-group">
                         <div class="col-xs-6">
                             <div class="checkbox icheck">
@@ -120,7 +130,6 @@ include "top.php";
                             </div>
                         </div>
                         <div class="col-xs-6">
-                            <input type="hidden" name="post_img" value="">
                             <input type="submit" class="btn btn-flat btn-primary pull-right" value="Wijzigingen opslaan"/>
                         </div>
                     </div>
@@ -156,12 +165,18 @@ include "top.php";
                 <!-- /.col -->
                 <div class="col-md-4">
                   <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle-o text-red"></i> School Feesten</li>
-                    <li><i class="fa fa-circle-o text-green"></i> Bruiloften</li>
-                    <li><i class="fa fa-circle-o text-yellow"></i> Prive Feesten</li>
-                    <li><i class="fa fa-circle-o text-aqua"></i> Verenigingen</li>
-                    <li><i class="fa fa-circle-o text-light-blue"></i> Verjaardagen</li>
-                    <li><i class="fa fa-circle-o text-gray"></i> Overig</li>
+                    <?php
+                        $SQL = "SELECT * FROM event_categories";
+                        $result = $conn->query($SQL);
+                      
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "<li>";
+                                echo "<i class='fa fa-circle text-red' style='color: " . $row['cat_color'] . " !important;'>";
+                                echo "</i> ";
+                                echo $row['cat_name'];
+                            echo "</li>";
+                        }
+                    ?>
                   </ul>
                 </div>
                 <!-- /.col -->
@@ -179,7 +194,7 @@ include "top.php";
   </div>
   <!-- /.content-wrapper -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard2.js"></script>
 <?php
+include "JS/verhuur_graph.php";
 include "bottom.php";
 ?>

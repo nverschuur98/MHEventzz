@@ -50,12 +50,13 @@ $post_img = "";
                                     echo '</div>';
                                 }else{
                                     echo '<div class="callout callout-success"><h4>Gelukt :)</h4><p>het bericht is succesvol verwijderd</p></div>';
+                                    header('Refresh: 3; url=newsitems.php');
                                 }
                                 
                             }else if($action == 1){
 
-                                $post_title = htmlentities($_POST['post_title']);
-                                $post_content = htmlentities($_POST['post_content']);
+                                $post_title = $conn->real_escape_string($_POST['post_title']);
+                                $post_content = $conn->real_escape_string($_POST['post_content']);
                                 $post_visible = false;
                                 if(!empty($_POST['post_img'])){
                                     $post_img = "admin/" . $_POST['post_img']; //CHECK FOR RIGHT LOCATION
@@ -63,7 +64,7 @@ $post_img = "";
                                 if(isset($_POST['post_visible'])){
                                     $post_visible = true;
                                 }
-                                
+                                                                
                                 if(isset($post_title) && isset($post_content) && !empty($post_title) && !empty($post_content)){
                                     // All required fields are filled in, ready to insert or update
 
@@ -93,6 +94,7 @@ $post_img = "";
                                         
                                     }else{
                                         //INSERT
+                                        $user_id = $_SESSION['user_id'];
                                         $SQL = "INSERT INTO posts (post_title, post_content, post_date, post_visible, post_img, post_by) VALUES ('$post_title', '$post_content', NOW(), '$post_visible', '$post_img', '$user_id')";
                                         
                                         $result = $connweb->query($SQL);
@@ -108,8 +110,18 @@ $post_img = "";
                                             header('Refresh: 3; url=newsitems.php');                                    
                                         }
                                     }
+                                    
+                                    if($post_id == "new"){
+                                        $post_id = mysql_insert_id();
+                                    }
+                                    
+                                    $fc_array = array($_FILES["post_img"], "post_img", $post_id);
+                                
+                                    upload_image($connweb, $fc_array);
+                                        
                                 }else{
                                     echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan, probeer het eens opnieuw</p></div>';
+                                    header('Refresh: 3; url=newsitems.php');
                                 }
                             }
                         ?>

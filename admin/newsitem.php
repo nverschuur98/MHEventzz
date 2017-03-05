@@ -87,15 +87,25 @@ if($post != "new"){
                 <?php }?>
             </div>
             <div class="box-body">
-                <form class="form-horizontal" action="newsitemsettings.php?post_id=<?php echo $post_id ?>&action=1" method="POST">
+                <form class="form-horizontal" action="newsitemsettings.php?post_id=<?php echo $post_id ?>&action=1" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input type="text" class="form-control" placeholder="Type hier de titel" name="post_title" <?php echo "value='" . $post_title . "'"; ?> >
                         </div>
                     </div>
+                    <hr>
                     <textarea class="textarea" placeholder="Type uw bericht" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="post_content">
                         <?php echo $post_content; ?>
                     </textarea>
+                    <hr>
+                    <div class="form-group">
+                        <label for="post_img" class="col-sm-12">Bericht Foto</label>
+                        <div class="col-sm-12">
+                            <input type="file" id="post_img" name="post_img" accept=".jpg,.jpeg,.png,.gif">
+                            <p class="help-block">let op: de afbeelding mag niet groter zijn dan 2MB.</p>
+                        </div>
+                    </div>
+                    <hr>
                     <div class="form-group">
                         <div class="col-xs-6">
                             <div class="checkbox icheck">
