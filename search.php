@@ -45,7 +45,7 @@ include "top.php";
         $query = mysql_real_escape_string($query);
         // makes sure nobody uses SQL injection
          
-        $raw_results = mysql_query("SELECT post_id, post_by, category_id, post_title, MID(post_content,1,850) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts
+        $raw_results = mysql_query("SELECT post_id, post_by, category_id, post_title, MID(post_content,1,500) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts
             WHERE post_visible = 1 AND (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%') AND post_visible = 1") or die(mysql_error());
              
         // * means that it selects all fields, you can also write: `id`, `title`, `text`
@@ -66,18 +66,21 @@ include "top.php";
             while($results = mysql_fetch_array($raw_results)){
             // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
                 
-                echo "<div class='col-xs-12'>
-                        <div class='box shadow'>
-                            <div class='min-height-18'>
-                               <div class='box-heading'>".$results['post_title']."</div>
+                echo "<div class='col-xs-12'>";
+                echo       "<div class='box shadow'>
+                            <div class='min-height-18'>";
+                echo "          <div class='col-xs-12 col-sm-6 col-md-10'>    
+                                <div class='box-heading'>".$results['post_title']."</div>
                                     <div class='hr'></div>
                                         <div class='box-body'>
-                                            <div class='col-xs-12 col-sm-6 col-md-8'>";
+                                            <div class='col-xs-12 col-sm-6 col-md-12'>";
                 
-                echo  "<p>".htmlspecialchars_decode ($results['post_content'])."<br /><a class='more' href='nieuws_page.php?id=".$results['post_id']."'>Meer</a></div>";
-                echo  "<div clas='col-xs-12 col-sm-6 col-md-4'><img style='width: 33.33333333%;height: auto;' src='".$results['post_img']."'></div>";
+                echo  "<p>".htmlspecialchars_decode ($results['post_content'])."<br />";
+                echo "<footer><a class='more' href='nieuws_page.php?id=".$results['post_id']."'>Meer</a></div></footer>";
                 // posts results gotten from database(title and text) you can also show id ($results['id'])
-                echo"</p></div></div></div></div>";
+                echo"</p></div></div></div>";
+                echo  "<div clas='col-xs-12 col-sm-6 col-md-2' style='margin-right:-2px;'><img style='width: 16.66666667%;height: 180px;' src='".$results['post_img']."'></div>";
+                echo"</div></div>";
             }
              
         }
