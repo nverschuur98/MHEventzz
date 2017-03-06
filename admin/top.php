@@ -199,6 +199,18 @@ check_logged_in();
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['user_name']; ?></p>
+          <?php
+            $online = $_SESSION['user_online']; 
+            
+            if ($online == 0){
+                echo '<a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>';
+            }else if ($online == 1){
+                echo '<a href="#"><i class="fa fa-circle text-success"></i> Online</a>';   
+            }else if ($online == 2){
+                echo '<a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>';
+            }
+              
+          ?>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->

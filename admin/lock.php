@@ -1,8 +1,13 @@
 <?php
 include "connection.php";
 session_start();
+$user_email = $_COOKIE['user_email'];
 
+$SQL = "UPDATE users SET user_online='2' WHERE user_email='$user_email'";
+$result2 = $conn->query($SQL);
 session_destroy();
+
+
 ?>
     <!DOCTYPE html>
     <html>

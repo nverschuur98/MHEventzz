@@ -186,7 +186,7 @@ if(isset($_GET['event_id'])){
                                 }else{
                                     echo '<div class="callout callout-danger"><h4>Mislukt :(</h4><p>Er is iets mis gegaan, probeer het eens opnieuw</p></div>';
                                 }
-                            }else if($action == "new"){
+                            }else if($action == 5){
                                 $SQL = "INSERT INTO events (event_title,event_color) VALUES ('Nieuw Feest', '" . random_color() . "')";
                                 
                                 $result = $conn->query($SQL);

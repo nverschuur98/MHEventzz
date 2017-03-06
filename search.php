@@ -46,7 +46,7 @@ include "top.php";
         // makes sure nobody uses SQL injection
          
         $raw_results = mysql_query("SELECT post_id, post_by, category_id, post_title, MID(post_content,1,500) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts
-            WHERE post_visible = 1 AND (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%') AND post_visible = 1") or die(mysql_error());
+            WHERE post_visible = 1 AND (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%') AND post_visible = 1 ORDER BY post_date DESC, post_id DESC") or die(mysql_error());
              
         // * means that it selects all fields, you can also write: `id`, `title`, `text`
         // articles is the name of our table
@@ -75,8 +75,9 @@ include "top.php";
                                         <div class='box-body'>
                                             <div class='col-xs-12 col-sm-6 col-md-12'>";
                 
-                echo  "<p>".htmlspecialchars_decode ($results['post_content'])."<br />";
-                echo "<footer><a class='more' href='nieuws_page.php?id=".$results['post_id']."'>Meer</a></div></footer>";
+                echo  "<p>".htmlspecialchars_decode ($results['post_content'])."<br /></p>";
+                echo "<div id='footer'><a class='more' href='nieuws_page.php?id=".$results['post_id']."'>Meer</a>";
+                echo  "<p>".htmlspecialchars_decode ($results['post_date_day'])."&nbsp".htmlspecialchars_decode ($results['post_date_month'])."&nbsp".htmlspecialchars_decode ($results['post_date_year'])."<br/></div></div>";
                 // posts results gotten from database(title and text) you can also show id ($results['id'])
                 echo"</p></div></div></div>";
                 echo  "<div clas='col-xs-12 col-sm-6 col-md-2' style='margin-right:-2px;'><img style='width: 16.66666667%;height: 180px;' src='".$results['post_img']."'></div>";
@@ -90,7 +91,7 @@ include "top.php";
          
     }
     else{ // if query length is less than minimum
-        echo "Minimale lengte is " . $min_length . "&nbsp;woorden!";
+        echo "Minimale lengte is " . $min_length . "&nbsp;letters!";
     }
 ?>
 

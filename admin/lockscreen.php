@@ -98,6 +98,9 @@ while($row = mysqli_fetch_assoc($result)){
                         echo $conn->error; //debugging purposes, uncomment when needed
                         echo '</div>';
                     }else{
+                        $SQL = "UPDATE users SET user_online='1' WHERE user_email='$user_email'";
+                        $result2 = $conn->query($SQL);
+                        
                         //set the $_SESSION['signed_in'] variable to TRUE
                         $_SESSION['logged_in'] = true;
                             //we also put the user_id and user_name values in the $_SESSION, so we can use it at various pages

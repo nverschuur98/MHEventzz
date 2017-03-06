@@ -108,7 +108,7 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
                         $remember = $_POST['remember'];
                     }
 
-                    $SQL = "SELECT user_id, user_name, user_email, user_image, user_description FROM users WHERE user_email ='$user_email' AND user_pass ='$user_pass'";
+                    $SQL = "SELECT user_id, user_name, user_email, user_online, user_image, user_description FROM users WHERE user_email ='$user_email' AND user_pass ='$user_pass'";
                     $result = $conn->query($SQL);
 
                     if(!$result){
@@ -123,7 +123,13 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
                         }else{
                             //set the $_SESSION['signed_in'] variable to TRUE
                             $_SESSION['logged_in'] = true;
-
+                            
+                            $SQL = "UPDATE users SET user_online='1' WHERE user_email='$user_email'";
+                            $result2 = $conn->query($SQL);
+                            
+                            $SQL = "SELECT user_online FROM users WHERE user_email='$user_email'";
+                            $result3 = $conn->query($SQL);
+                            
                             //we also put the user_id and user_name values in the $_SESSION, so we can use it at various pages
                             while($row = mysqli_fetch_assoc($result))
                             {
@@ -134,6 +140,11 @@ if(isset($_COOKIE['user']) && !empty($_COOKIE['user']) && isset($_COOKIE['user_e
                                 $_SESSION['user_description'] = $row['user_description'];
 
                             }
+                            
+                            while($row3 = mysqli_fetch_assoc($result3)){
+                                $_SESSION['user_online'] = $row3['user_online'];
+                            }
+                            
 
                             if(!empty($_POST['remember'])){
                                 $remember = $_POST['remember'];

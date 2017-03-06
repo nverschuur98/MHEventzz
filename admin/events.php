@@ -22,7 +22,7 @@ include "top.php";
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li>
-                            <form action="eventsettings.php?action=new" method="POST">
+                            <form action="eventsettings.php?action=5" method="POST">
                                 <button type="submit" class="btn btn-success btn-flat btn-sm" style="margin: 5px; margin-bottom: 9px; margin-left: 9px;">
                                     <i class="fa fa-plus"></i>
                                 </button>
