@@ -101,6 +101,9 @@ while($row = mysqli_fetch_assoc($result)){
                         $SQL = "UPDATE users SET user_online='1' WHERE user_email='$user_email'";
                         $result2 = $conn->query($SQL);
                         
+                        $SQL = "SELECT user_online FROM users WHERE user_email='$user_email'";
+                        $result3 = $conn->query($SQL);
+                        
                         //set the $_SESSION['signed_in'] variable to TRUE
                         $_SESSION['logged_in'] = true;
                             //we also put the user_id and user_name values in the $_SESSION, so we can use it at various pages
@@ -109,6 +112,10 @@ while($row = mysqli_fetch_assoc($result)){
                             $_SESSION['user_name']  = $row['user_name'];
                             $_SESSION['user_email'] = $row['user_email'];
                             $_SESSION['user_image'] = $row['user_image'];
+                        }
+                        
+                        while($row2 = mysqli_fetch_assoc($result3)){
+                            $_SESSION['user_online'] = $row['user_online'];
                         }
                         header('Refresh: 0; url=index.php');
                     }

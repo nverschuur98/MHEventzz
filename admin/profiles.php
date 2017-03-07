@@ -30,7 +30,7 @@ include "top.php";
                     $row_ended = false;
                 }
                 
-                echo "<a href='profile.php?show_user=" . $row['user_name'] . "'><div class='col-md-3 col-sm-6'>";
+                echo "<a href='profile.php?show_user=" . $row['user_name'] . "'><div class='col-md-6 col-sm-6'>";
                     echo "<div class='box box-widget widget-user'>";
                         echo "<div class='widget-user-header bg-green'";
                             if(!empty($row['user_cover_image'])){
@@ -50,8 +50,20 @@ include "top.php";
                                         echo "<span class='description-text'>Feestjes</span>";
                                     echo "</div>";
                                 echo "</div>";
-                                echo "<div class='col-sm-4 border-right'>";
-                                
+                                echo "<div class='col-sm-4 border-right' style='position:center;'>";
+                                    echo "<div class='description-block'>";
+                                        echo "<h5 class='discription' style='position:center; font-size:17px; margin-top:10%;'>";
+                                        $online_user = $row['user_online']; 
+                                        
+                                        if ($online_user == 0){
+                                            echo '<i class="fa fa-circle text-danger"></i> Offline';
+                                        }else if ($online_user == 1){
+                                            echo '<i class="fa fa-circle text-success"></i> Online';   
+                                        }else if ($online_user == 2){
+                                            echo '<i class="fa fa-circle text-warning" style="color:#ffd200"></i> Afwezig';
+                                        }
+                                        echo "</h5>";
+                                    echo "</div>";
                                 echo "</div>";
                                 echo "<div class='col-sm-4'>";
                                 

@@ -200,14 +200,22 @@ check_logged_in();
         <div class="pull-left info">
           <p><?php echo $_SESSION['user_name']; ?></p>
           <?php
-            $online = $_SESSION['user_online']; 
+            $user_name = $_SESSION['user_name'];
+            $user_email = $_SESSION['user_email'];
+            
+            $SQL = "SELECT * FROM users WHERE user_name='$user_name' AND user_email='$user_email'";
+            $result = $conn->query($SQL);
+            
+            while($row = mysqli_fetch_assoc($result)){
+                $online = $row['user_online']; 
+            }
             
             if ($online == 0){
                 echo '<a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>';
             }else if ($online == 1){
                 echo '<a href="#"><i class="fa fa-circle text-success"></i> Online</a>';   
             }else if ($online == 2){
-                echo '<a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>';
+                echo '<a href="#"><i class="fa fa-circle text-warning" style="color:#ffd200"></i> Afwezig</a>';
             }
               
           ?>
