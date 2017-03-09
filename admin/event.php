@@ -215,10 +215,17 @@ if($event_post != 0){
                             <form class="form-horizontal" action="eventsettings.php?event_id=<?php echo $event_id ?>&action=3" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="inputColor" class="col-sm-3 control-label">Kleur</label>
-                                    <div class="col-sm-9">
-                                        <input type="color" class="form-control" id="inputColor" value="<?php echo $event_color; ?>" name="event_color">
+                                    <div class="col-sm-9 input-group color" style="padding:auto;">
+                                        <input type="txt" class="form-control" id="inputColor" value="<?php echo $event_color; ?>" name="event_color">
+                                        <span class="input-group-addon"><i></i></span>
                                     </div>
+                                    <script>
+                                        $(function(){
+                                            $('.color').colorpicker();
+                                        });
+                                    </script>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="inputType" class="col-sm-3 control-label">Type</label>
                                     <div class="col-sm-9">
@@ -273,6 +280,15 @@ if($event_post != 0){
                             <textarea class="textarea" placeholder="Type uw bericht" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="post_content">
                                 <?php if($event_post != 0){ echo $event_post_content; } ?>
                             </textarea>
+                            <hr>
+                            <div class="form-group">
+                                <label for="post_img" class="col-sm-12">Bericht Foto</label>
+                                <div class="col-sm-12">
+                                    <input type="file" id="post_img" name="post_img" accept=".jpg,.jpeg,.png,.gif">
+                                    <p class="help-block">let op: de afbeelding mag niet groter zijn dan 2MB.</p>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="form-group">
                                 <div class="col-xs-6">
                                   <div class="checkbox icheck">

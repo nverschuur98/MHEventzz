@@ -7,7 +7,7 @@ include "top.php";
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Version 0.3.9</small>
+        <small>Version 0.4.1</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -184,6 +184,112 @@ include "top.php";
               <!-- /.row -->
             </div>
           </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+          <div class="box box-succes">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Volgende Feest</h3>
+
+                  <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                  </div>
+              </div>
+                      <?php 
+                        $SQL = "SELECT *, DATE_FORMAT(event_date,'%d %b %Y') AS date FROM events ORDER BY event_date DESC LIMIT 1";
+                        $result = $conn->query($SQL);
+                        while($row = mysqli_fetch_assoc($result)){
+                            
+                        $event_titel = $row['event_title'];
+                        $event_location = $row['event_location'];   
+                        $date = $row['date'];
+                      
+                        echo "<div class='widget-user-header bg-black box-body' style='background: " . $row['event_color'] . " ";
+                            if(!empty($row['event_cover_image'])){
+                                echo "url(\"" . $row['event_cover_image'] . "\") center center;background-size: cover;height: 200px; ";
+                            }
+                        echo "!important;'>";
+                            
+                    ?>
+                  <h3 class='widget-user-username' style='margin-top: -0px;'><?php echo $event_titel; ?></h3></div>
+                        <div class='box-footer' style='padding-top: 10px!important;'>
+                            <div class='row'>
+                                <div class='col-sm-6 border-right'>
+                                    <div class='description-block'>
+                                        <h5 class='description-header'><?php echo $date; ?></h5>
+                                        <span class='description-text'>Datum</span>
+                                    </div>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <div class='description-block'>
+                                        <h5 class='description-header'><?php echo $event_location; ?></h5>
+                                        <span class='description-text'>Locatie</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php }?>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                  <a href="events.php" class="uppercase">Alle feesten</a>
+                </div>
+                <!-- /.box-footer -->
+              </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+          <?php
+          
+            $SQL = "SELECT COUNT(*) AS NumberOfUrders FROM users;";
+            $result1 = $conn->query($SQL);
+            $row1 = $result1->fetch_assoc();{
+          ?>
+          <div class="col-md-6">
+          <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Gebruikers</h3>
+
+                  <div class="box-tools pull-right">
+                    <span class="label label-danger"><?php echo $row1['NumberOfUrders'] ?> Gebruikers</span>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+              <?php
+                }
+              ?>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                  <ul class="users-list clearfix">
+                    
+                    <?php 
+                      $SQL = "SELECT user_name, user_image, DATE_FORMAT(user_since,'%d')AS user_date_day, DATE_FORMAT(user_since,'%m')AS user_date_month, DATE_FORMAT(user_since,'%Y') AS user_date_year FROM users ORDER BY user_name ASC"; 
+                      $result = $conn->query($SQL);  
+                      
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "<li><a href='profile.php?show_user=" . $row['user_name'] . "'>";
+                                echo "<img src='" . $row['user_image'] . "' alt='User Image' width='80'>";
+                                echo "<a class='users-list-name' href='profile.php?show_user=" . $row['user_name'] . "'>" . $row['user_name'] . "</a>";
+                                echo "<span class='users-list-date'>" . $row['user_date_day'] . "-" . $row['user_date_month'] .  "-" . $row['user_date_year'] .  "</span>";
+                            echo "</a></li>";
+                        }
+                    ?>
+                    
+                  </ul>
+                  <!-- /.users-list -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                  <a href="profiles.php" class="uppercase">Alle gebruikers</a>
+                </div>
+                <!-- /.box-footer -->
+              </div>
           <!-- /.box -->
         </div>
         <!-- /.col -->

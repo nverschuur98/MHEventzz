@@ -26,6 +26,8 @@ check_logged_in();
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- Text editor Style-->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- color pricker -->
+    <link rel="stylesheet" href="plugins/colorpicker/bootstrap-colorpicker.min.css">
     <!-- iCheck -->
       <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -93,15 +95,23 @@ check_logged_in();
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Notifications: style can be found in dropdown.less -->
-            <?php /*
+        
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <?php
+                
+                    $user_id = $_SESSION['user_id'];
+                
+                
+                    $date = date("m-d-Y", strtotime('-3 day'));
+                    $SQL = "DELETE FROM notifications WHERE noti_date < (NOW() - INTERVAL 2 DAY) AND noti_user='$user_id'";
+                    $result2 = $conn->query($SQL);
+                
                     $amount = noti_count($conn, $_SESSION['user_id']);
                     if($amount > 0){
                 ?>
-                <span class="label label-warning"><?php echo $amount;?></span>
+                <span class="label label-warning"><?php echo $amount; ?></span>
                 <?php
                     }
                 ?>
@@ -124,7 +134,6 @@ check_logged_in();
                 <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                         <?php  
-                            $user_id = $_SESSION['user_id'];
                             $SQL = "SELECT * FROM notifications WHERE noti_user='$user_id' ORDER BY noti_id DESC";
     
                             $result = $conn->query($SQL);
@@ -132,14 +141,16 @@ check_logged_in();
                                 $noti_cat = $row['noti_cat'];
                                 $noti_title = $row['noti_title'];
                                 $noti_link = $row['noti_link'];
+                                $noti_id = $row['noti_id'];
                                 
                                 echo "<li>";
-                                echo "<a href='$noti_link'>";
+                                echo "<a href='$noti_link?action=1&noti_id=$noti_id' onClick='self.location='$noti_link?action=1'')'>";
                                 echo "<i class='" . noti_cat_to_class($conn, $noti_cat) . "'></i>" . $noti_title;
                                 echo "</a>";
                                 echo "</li>";
                                 
                             }
+                        
                         ?> 
                     </ul>
                 </li>
@@ -148,7 +159,7 @@ check_logged_in();
                 ?> 
                 <li class="footer"><a href="#">View all</a></li>
             </ul>
-          </li> */ ?>
+          </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a href="lock.php" class="dropdown-toggle">

@@ -55,7 +55,7 @@ function noti_cat_to_class($conn, $cat){
 
 //Create a noti
 function noti_create($conn, $cat, $title, $link, $user){
-    $SQL = "INSERT INTO notifications (noti_user, noti_cat, noti_title, noti_link) VALUES ('$user','$cat', '$title', '$link')";
+    $SQL = "INSERT INTO notifications (noti_user, noti_cat, noti_title, noti_link, noti_date) VALUES ('$user','$cat', '$title', '$link', NOW())";
     $result = $conn->query($SQL);
 }
 

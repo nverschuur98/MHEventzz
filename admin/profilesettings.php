@@ -173,7 +173,7 @@ $user_description = $conn->real_escape_string($_POST['user_description']);
                             }
 
                              // Check file size
-                            if ($_FILES["cover_image"]["size"] > 500000) {
+                            if ($_FILES["cover_image"]["size"] > 1000000) {
                                $errorArray[] = "Sorry, your file is too large.";
                                 $uploadOk = 0;
                             }

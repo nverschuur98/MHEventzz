@@ -45,7 +45,7 @@ include "top.php";
         $query = mysql_real_escape_string($query);
         // makes sure nobody uses SQL injection
          
-        $raw_results = mysql_query("SELECT post_id, post_by, category_id, post_title, MID(post_content,1,500) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts
+        $raw_results = mysql_query("SELECT post_id, post_by, category_id, post_title, MID(post_content,1,450) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts
             WHERE post_visible = 1 AND (`post_title` LIKE '%".$query."%') OR (`post_content` LIKE '%".$query."%') AND post_visible = 1 ORDER BY post_date DESC, post_id DESC") or die(mysql_error());
              
         // * means that it selects all fields, you can also write: `id`, `title`, `text`

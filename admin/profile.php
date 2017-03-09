@@ -21,7 +21,18 @@ while($row = mysqli_fetch_assoc($result)){
     $user_since = $row['since'];
 }
 
+$action = $_GET['action'];
+ 
+if($action == 1){
+        $noti_id = $_GET['noti_id'];
+        
+        $SQL = "DELETE FROM notifications WHERE noti_id='$noti_id'";                        
+        $result = $conn->query($SQL);
+    }else{
+        
+    }
 ?>
+
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

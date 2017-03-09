@@ -143,7 +143,7 @@ if(isset($_GET['event_id'])){
 
                                     if(!empty($event_post) || $event_post != 0){
                                         // UPDATE
-                                        $SQL = "UPDATE posts SET post_title='$post_title', post_content='$post_content', post_visible='$post_visible' WHERE post_id='$event_post'";
+                                        $SQL = "UPDATE posts SET post_title='$post_title', post_content='$post_content', post_visible='$post_visible', post_img='$post_img' WHERE post_id='$event_post'";
                                         
                                         $result = $connweb->query($SQL);
                                         
