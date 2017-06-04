@@ -57,7 +57,7 @@ include "top.php";
                                 echo "url(\"" . $row['event_cover_image'] . "\") center center; background-size: cover ";
                             }
                         echo "!important;'>";
-                            echo "<h3 class='widget-user-username'>" . $row['event_title'] . "</h3>";
+                            echo "<h3 class='widget-user-username'><b>" . $row['event_title'] . "</b></h3>";
                         echo "</div>"; 
                         echo "<div class='box-footer' style='padding-top: 10px!important;'>";
                             echo "<div class='row'>";

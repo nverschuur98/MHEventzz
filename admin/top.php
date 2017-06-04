@@ -244,6 +244,18 @@ check_logged_in();
                 <i class="ion ion-android-textsms"></i> <span>Berichten</span>
             </a>
         </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="ion ion-images"></i> <span>Sliders</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="slider.php?slider=Home"><i class="ion ion-image"></i> Home</a></li>
+                <li><a href="slider.php?slider=Galerij"><i class="ion ion-image"></i> Gallerij</a></li>
+            </ul>
+        </li>
         <li>
             <a href="events.php">
                 <i class="ion ion-beer"></i> <span>Feestjes</span>

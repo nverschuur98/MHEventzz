@@ -55,7 +55,7 @@ include "top.php";
                                 echo "url(\"../" . $row['post_img'] . "\") center center ";
                             }
                         echo "!important;'>";
-                            echo "<h3 class='widget-user-username'>" . $row['post_title'] . "</h3>";
+                            echo "<h3 class='widget-user-username'><b>" . $row['post_title'] . "</b></h3>";
                         echo "</div>"; 
                         echo "<div class='box-body message-box'>"; 
                             echo "<div class='row'>";

@@ -10,6 +10,11 @@
         height: 200px;
         overflow-x: hidden;
     }
+    
+    .message-box-small{
+        height: 80px;
+        overflow-x: hidden;
+    }
 }
 
 

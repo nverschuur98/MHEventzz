@@ -104,6 +104,7 @@ function upload_image($conn, $fc_array){
         [0]= image_input
         [1]= image_use //profile image //news image //cover image
         [2]= image_use_ident //Assign to this id or email etc
+        [3]= slider_location //Specify the slider location map
         
         array(1=>"image", 2=>"43", 3=>"");
     */
@@ -115,6 +116,9 @@ function upload_image($conn, $fc_array){
             $target_dir_final = $target_dir;
         }else if($fc_array[1] == "post_img"){
             $target_dir = "IMG/posts/" . $fc_array[2] . "/"; 
+            $target_dir_final = "../" . $target_dir;
+        }else if($fc_array[1] == "slider_img"){
+            $target_dir = "IMG/slider/" . $fc_array[3] . "/"; 
             $target_dir_final = "../" . $target_dir;
         }
         
@@ -143,6 +147,9 @@ function upload_image($conn, $fc_array){
             $errorArray[] = "Sorry, file already exists.";
             $uploadOk = 0;
         }else if($fc_array[1] == "post_img" && file_exists($target_file_final)){
+            $errorArray[] = "Sorry, file already exists.";
+            $uploadOk = 0;
+        }else if($fc_array[1] == "slider_img" && file_exists($target_file_final)){
             $errorArray[] = "Sorry, file already exists.";
             $uploadOk = 0;
         }
@@ -179,6 +186,9 @@ function upload_image($conn, $fc_array){
             }else if($fc_array[1] == "post_img"){
                 $SQL = "UPDATE posts SET post_img='$target_file' WHERE post_id='$fc_array[2]'";
                 $message = "Je bericht foto is succesvol gewijzigd!";
+            }else if($fc_array[1] == "slider_img"){
+                $SQL = "UPDATE slider SET slider_img='$target_file' WHERE slider_id='$fc_array[2]'";
+                $message = "Je slider is succesvol gewijzigd!";
             }  
             
             $result = $conn->query($SQL);

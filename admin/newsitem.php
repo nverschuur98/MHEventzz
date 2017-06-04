@@ -78,7 +78,7 @@ if($post != "new"){
                 <?php if($post != "new"){ ?>
                     <div class="pull-right box-tools">
                         <form action="newsitemsettings.php?post_id=<?php echo $post_id ?>&action=0" method="POST">
-                            <input type="hidden" name="post_title" <?php echo "value='" . $post_title . "'"; ?>>
+                            <input type="hidden" name="post_title" value="<?php echo $post_title ?>">
                             <button type="submit" class="btn btn-danger btn-flat">
                                 <i class="fa fa-trash"></i>
                             </button>

@@ -37,7 +37,7 @@ include "top.php";
                                 echo "style='background: url(\"" . $row['user_cover_image'] . "\") center center;'";
                             }
                         echo ">";
-                            echo "<h3 class='widget-user-username'>" . $row['user_name'] . "</h3>";
+                            echo "<h3 class='widget-user-username'><b>" . $row['user_name'] . "</b></h3>";
                         echo "</div>"; 
                         echo "<div class='widget-user-image'>";
                             echo "<img class='img-circle' src='" . $row['user_image'] . "' alt='User Avatar'>";
@@ -73,7 +73,7 @@ include "top.php";
                     echo "</div>";
                 echo "</div></a>";
                 
-                if($col_number == 4){
+                if($col_number == 2){
                     echo "</div>";
                     $col_number = 0;
                     $row_ended = true;
