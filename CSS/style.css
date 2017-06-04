@@ -406,9 +406,9 @@ background: url(../IMG/logo.jpg) no-repeat center center;
 -moz-background-size: cover; 
 -o-background-size: cover; 
 background-size: cover; 
-height: 150px;
+height: 200px;
 width: 100%;
-position: relative; 
+position: relative;
 }
 
 .more{

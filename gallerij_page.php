@@ -11,16 +11,15 @@ if($request_page == "nieuwjaarsgala"){
 		<?php
 			$photonumber=1; 
 			while($photonumber<=61){
-				echo "
-					<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>
+                ?>
+					<div class='col-lg-3 col-md-4 col-sm-4 col-xs-6'>
 						<div class='box shadow margin-20-top'>
-							<a class='gal-thumb ' href='IMG\Nieuwjaarsgala2016\DSC (" . $photonumber . ").jpg' data-lightbox='Gallerij'><!--Real Image-->
-								<img class='gal-img shadow' src='IMG\Nieuwjaarsgala2016\\thumb\DSC (" . $photonumber . ").jpg' alt=''><!--Thumbnail-->
+							<a href='IMG\Nieuwjaarsgala2016\DSC (<?php echo $photonumber ?>).jpg' data-lightbox='Gallerij'>
+                                <div class='gal-img shadow' style="background-image: url('IMG\\Nieuwjaarsgala2016\\thumb\\DSC (<?php echo $photonumber ?>).jpg')"></div>
 							</a>
 						</div>
-					</div>"
-				;	
-			
+					</div>
+                <?php
 				$photonumber++;
 			} 
 		?>
@@ -39,16 +38,15 @@ $page_title = "Galerij";
 		<?php
 			$photonumber=1; 
 			while($photonumber<=362){
-				echo "
-					<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>
+                ?>
+					<div class='col-lg-3 col-md-4 col-sm-4 col-xs-6'>
 						<div class='box shadow margin-20-top'>
-							<a class='gal-thumb ' href='IMG\Nieuwjaarsgala2016-fotohoek\Gala (" . $photonumber . ").jpg' data-lightbox='Gallerij'><!--Real Image-->
-								<img class='gal-img shadow' src='IMG\Nieuwjaarsgala2016-fotohoek\\thumb\Gala (" . $photonumber . ").jpg' ><!--Thumbnail-->
+							<a href='IMG\Nieuwjaarsgala2016-fotohoek\Gala (<?php echo $photonumber ?>).jpg' data-lightbox='Gallerij'>
+                                <div class='gal-img shadow' style="background-image: url('IMG\\Nieuwjaarsgala2016-fotohoek\\thumb\\Gala (<?php echo $photonumber ?>).jpg')"></div>
 							</a>
 						</div>
-					</div>"
-				;	
-			
+					</div>
+                <?php
 				$photonumber++;
 			} 
 		?>
@@ -67,16 +65,15 @@ $page_title = "Galerij";
 		<?php
 			$photonumber=1; 
 			while($photonumber<=20){
-				echo "
-					<div class='col-lg-2 col-md-3 col-sm-4 col-xs-6'>
+				?>
+					<div class='col-lg-3 col-md-4 col-sm-4 col-xs-6'>
 						<div class='box shadow margin-20-top'>
-							<a class='gal-thumb ' href='IMG\Waddinxveen2016\MIB (" . $photonumber . ").jpg' data-lightbox='Gallerij'><!--Real Image-->
-								<img class='gal-img shadow' src='IMG\Waddinxveen2016\\\MIB (" . $photonumber . ").jpg' alt=''><!--Thumbnail-->
+							<a href='IMG\Waddinxveen2016\MIB (<?php echo $photonumber ?>).jpg' data-lightbox='Gallerij'>
+                                <div class='gal-img shadow' style="background-image: url('IMG\\Waddinxveen2016\\MIB (<?php echo $photonumber ?>).jpg')"></div>
 							</a>
 						</div>
-					</div>"
-				;	
-			
+					</div>
+                <?php			
 				$photonumber++;
 			} 
 		?>
