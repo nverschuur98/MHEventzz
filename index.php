@@ -7,33 +7,33 @@ include "top.php";
 $SQL = "SELECT post_id, post_by, category_id, post_title, MID(post_content,1,255) AS post_content, DATE_FORMAT(post_date,'%d')AS post_date_day, DATE_FORMAT(post_date,'%M')AS post_date_month, DATE_FORMAT(post_date,'%Y')AS post_date_year, post_img FROM posts WHERE post_visible = 1 ORDER BY post_date DESC, post_id DESC LIMIT 3";
 $result1 = $connection->query($SQL);
 
-$SQL = "SELECT slider_img, slider_title, slider_content, slider_id FROM slider ORDER BY slider_id ASC";
+$SQL = "SELECT slider_img, slider_title, slider_content, slider_id FROM slider WHERE slider_location='1' ORDER BY slider_id ASC";
 $result2 = $connection->query($SQL);
 ?>
 <article class="body-item">
 	<div class="slider hidden-xs padding-20-top">
 		<div id="myCarousel" class="carousel slide shadow" data-ride="carousel">
 		  <!-- Indicators -->
-			<ol class="carousel-indicators">
+			<!--<ol class="carousel-indicators">
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				<li data-target="#myCarousel" data-slide-to="1"></li>
 				<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>
+			</ol>-->
 
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
-
-				<div class="item active height-300">
-					<img src="IMG/nieuwjaar2016.jpg" alt="Chania" class="cover">
-					<div class="carousel-caption">
-						<h3>Nieuwjaarsgala</h3>
-					</div>
-				</div>
-
 			<?php 
+                
+                $firstActive = false;
+                
 			while($row2 = $result2->fetch_assoc()){
 				$_SESSION['slider_img']    = $row2['slider_img'];
-				echo "<div class='item height-300'>";
+				echo "<div class='item ";
+                if(!$firstActive){
+                    echo "active ";
+                    $firstActive = true;
+                }
+                echo "height-300'>";
 				echo "<img src='". $_SESSION['slider_img'] ."' alt='Chania' class='cover'>";
 				echo "<div class='carousel-caption'>";
 				echo "<h3>" . $row2['slider_title'] . "</h3>";
